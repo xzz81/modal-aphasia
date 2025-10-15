@@ -1,0 +1,4 @@
+misc/faces_raw.zip filter=lfs diff=lfs merge=lfs -text
+misc/results_concepts.zip filter=lfs diff=lfs merge=lfs -text
+misc/results_faces.zip filter=lfs diff=lfs merge=lfs -text
+misc/results_safety.zip filter=lfs diff=lfs merge=lfs -text

@@ -1,0 +1,44 @@
+[project]
+name = "modal-aphasia"
+version = "0.1.0"
+description = "Official code for Modal Aphasia paper"
+readme = "README.md"
+requires-python = "==3.12.*"
+dependencies = [
+    "numpy>=2.3.2",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.3.0",
+    "scikit-learn>=1.7.1",
+    "datasets>=4.0.0",
+    "huggingface_hub[cli]>=0.34.3",
+    "ipykernel>=6.30.0",
+    "sentencepiece>=0.2.0",
+    "attrdict>=2.0.1",
+    "einops>=0.8.1",
+    "wandb>=0.21.0",
+    "openai>=1.99.1",
+    "python-dotenv>=1.1.1",
+    "scikit-multilearn>=0.2.0",
+    "google-genai>=1.29.0",
+    "matplotlib>=3.10.5",
+    "aiohttp~=3.12.15",
+]
+
+[dependency-groups]
+fine_tune = [
+    "timm>=0.9.16",
+    "torch>=2.7.1",
+    "transformers>=4.55.0",
+    "accelerate>=1.9.0",
+    "xtuner>=0.1.23",
+    "mmengine>=0.10.7",
+    "deepspeed>=0.17.4",
+    "trl>=0.21.0",
+    "peft>=0.17.0",
+]
+dev = [
+    "ruff~=0.12.7",
+]
+
+[tool.ruff]
+line-length = 120

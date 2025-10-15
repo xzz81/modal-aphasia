@@ -1,0 +1,471 @@
+# Adapted from https://github.com/wusize/harmon/blob/main/harmon/src/models/harmon_dev.py
+# but without all the MMEngine configuration nightmarishness
+
+import math
+
+import numpy as np
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+import transformers
+from einops import rearrange
+from torch.autograd.function import Function
+from torch.nn.modules.module import T
+from torch.nn.utils.rnn import pad_sequence
+from tqdm import tqdm
+from transformers.cache_utils import DynamicCache
+from xtuner.model.utils import guess_load_checkpoint
+import transformers.modeling_outputs
+
+
+def build_mlp(hidden_size, projector_dim, z_dim):
+    return nn.Sequential(
+        nn.Linear(hidden_size, projector_dim),
+        nn.SiLU(),
+        nn.Linear(projector_dim, z_dim),
+    )
+
+
+def mask_by_order(mask_len, order, bsz, seq_len):
+    masking = torch.zeros(bsz, seq_len, device=order.device)
+    masking = torch.scatter(
+        masking,
+        dim=-1,
+        index=order[:, : mask_len.long()],
+        src=torch.ones(bsz, seq_len, device=order.device),
+    ).bool()
+    return masking
+
+
+class _ScaleGradient(Function):
+    @staticmethod
+    def forward(ctx, input, scale):
+        ctx.scale = scale
+        return input
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        return grad_output * ctx.scale, None
+
+
+class Harmon(nn.Module):
+    def __init__(
+        self,
+        vae: nn.Module,
+        vae_scale: float,
+        llm: nn.Module,
+        mar: nn.Module,
+        tokenizer: transformers.AutoTokenizer,
+        prompt_template: dict,
+    ):
+        super().__init__()
+        # VAE
+        self.vae = vae
+        self.vae.requires_grad_(False)
+        self.vae_scale = vae_scale
+
+        # LLM
+        self.llm = llm
+        self.tokenizer = tokenizer
+        self.prompt_template = prompt_template
+
+        # MAR
+        self.mar = mar
+        # projection layers
+        self.proj_in = build_mlp(
+            hidden_size=self.mar.encoder_embed_dim,
+            projector_dim=self.llm.config.hidden_size,
+            z_dim=self.llm.config.hidden_size,
+        )
+        self.proj_out = build_mlp(
+            hidden_size=self.llm.config.hidden_size,
+            projector_dim=self.llm.config.hidden_size,
+            z_dim=self.mar.encoder_embed_dim,
+        )
+
+    @property
+    def llm_model(self):
+        return self.llm.model
+
+    @property
+    def device(self):
+        return self.llm.device
+
+    @property
+    def dtype(self):
+        return self.llm.dtype
+
+    @property
+    def gen_seq_len(self):
+        return self.mar.seq_len
+
+    @property
+    def token_embed_dim(self):
+        return self.vae.embed_dim * (self.mar.patch_size**2)
+
+    @torch.no_grad()
+    def encode(self, x):
+        posterior = self.vae.encode(x)
+        z = posterior.mode().mul_(self.vae_scale)
+        z = rearrange(
+            z,
+            "b c (m p) (n q) -> b m n (c p q)",
+            p=self.mar.patch_size,
+            q=self.mar.patch_size,
+        )
+
+        return z
+
+    @torch.no_grad()
+    def decode(self, z):
+        z /= self.vae_scale
+        z = rearrange(
+            z,
+            "b m n (c p q) -> b c (m p) (n q)",
+            p=self.mar.patch_size,
+            q=self.mar.patch_size,
+        )
+
+        x = self.vae.decode(z)
+        return x
+
+    def prepare_forward_input(
+        self,
+        x,
+        inputs_embeds=None,
+        input_ids=None,
+        attention_mask=None,
+        past_key_values=None,
+    ):
+        b, l, _ = x.shape
+        attention_mask = attention_mask.to(device=self.device, dtype=torch.bool)
+        attention_mask = torch.cat([attention_mask, attention_mask.new_ones(b, l)], dim=1)
+        position_ids = torch.cumsum(attention_mask, dim=1) - 1
+        position_ids[position_ids < 0] = 0
+
+        # import pdb; pdb.set_trace()
+
+        # prepare context
+        if past_key_values is not None:
+            inputs_embeds = x
+            position_ids = position_ids[:, -l:]
+        else:
+            if inputs_embeds is None:
+                input_ids = input_ids.to(self.device)
+                inputs_embeds = self.llm.get_input_embeddings()(input_ids)
+            inputs_embeds = torch.cat([inputs_embeds, x], dim=1)
+
+        return dict(
+            inputs_embeds=inputs_embeds,
+            attention_mask=attention_mask,
+            position_ids=position_ids,
+            past_key_values=past_key_values,
+        )
+
+    def extract_visual_feature(self, x, mask=None, detach=False):
+        b, m, n, _ = x.shape
+        x = x.view(b, m * n, -1)
+        # x: b mn c
+        if mask is None:
+            mask = torch.zeros_like(x[..., 0])
+        null_embeds = self.mar.fake_latent.expand(x.shape[0], -1)
+        x_enc = self.mar.forward_mae_encoder(x, mask, null_embeds, image_shape=(m, n))
+
+        z_enc = self.proj_in(x_enc)
+        # Move buffers to the end of the image sequence
+        z_enc = torch.cat([z_enc[:, self.mar.buffer_size :], z_enc[:, : self.mar.buffer_size]], dim=1)
+
+        if detach:
+            x_enc = x_enc.detach()
+            z_enc = z_enc.detach()
+
+        return x_enc, z_enc
+
+    def forward_mae_encoder(self, x, mask, detach=False, **context):
+        b, m, n, _ = x.shape
+        x_enc, z_enc = self.extract_visual_feature(x, mask=mask, detach=detach)
+        inputs = self.prepare_forward_input(x=z_enc, **context)
+        output = self.llm_model(**inputs, return_dict=True)
+
+        z_llm = output.last_hidden_state[:, -z_enc.shape[1] :]
+
+        # move buffers back to the start of the image sequence
+        z_llm = torch.cat(
+            [z_llm[:, -self.mar.buffer_size :], z_llm[:, : -self.mar.buffer_size]],
+            dim=1,
+        )
+
+        # residual learning
+        x_enc = x_enc + self.proj_out(z_llm)
+
+        return x_enc
+
+    @staticmethod
+    def curtail_cache(past_key_values, cur_len):
+        for past_key_values_ in past_key_values:
+            keys, values = past_key_values_
+            keys.data = keys.data[:, :, :cur_len]
+            values.data = values.data[:, :, :cur_len]
+
+    @torch.no_grad()
+    def prepare_text_conditions(self, prompt, cfg_prompt="Generate an image."):
+        all_prompts = [
+            self.prompt_template["INSTRUCTION"].format(input=prompt),
+            self.prompt_template["INSTRUCTION"].format(input=cfg_prompt),
+        ]
+
+        input_ids = [self.tokenizer.encode(p, add_special_tokens=True, return_tensors="pt")[0] for p in all_prompts]
+        valid_lens = [len(input_ids_) for input_ids_ in input_ids]
+        input_ids = pad_sequence(input_ids, batch_first=True, padding_value=self.tokenizer.eos_token_id)
+        attention_mask = torch.zeros_like(input_ids).bool()
+        for i in range(len(input_ids)):
+            attention_mask[i, : valid_lens[i]] = True
+
+        return dict(
+            input_ids=input_ids.to(self.device),
+            attention_mask=attention_mask.to(self.device),
+        )
+
+    @torch.inference_mode()
+    def sample(
+        self,
+        input_ids=None,
+        inputs_embeds=None,
+        attention_mask=None,
+        num_iter=64,
+        cfg=1.0,
+        cfg_schedule="constant",
+        temperature=1.0,
+        progress=False,
+        mask=None,
+        past_key_values=None,
+        image_shape=None,
+        x_con=None,
+        rng: np.random.Generator | None = None,
+        **kwargs,
+    ):
+        if inputs_embeds is None and input_ids is not None:
+            inputs_embeds = self.llm.get_input_embeddings()(input_ids)
+
+        bsz = attention_mask.shape[0]
+        if cfg != 1.0:
+            assert bsz % 2 == 0
+
+        if image_shape is None:
+            m = n = int(self.gen_seq_len**0.5)
+        else:
+            m, n = image_shape
+
+        if mask is None:
+            mask = torch.ones(bsz, m * n, device=self.device, dtype=self.dtype)
+        else:
+            mask = mask.view(bsz, m * n)
+        tokens = torch.zeros(bsz, m * n, self.token_embed_dim, device=self.device, dtype=self.dtype)
+        orders = self.mar.sample_orders(bsz, seq_len=m * n, rng=rng)
+        if cfg != 1.0:
+            orders[bsz // 2 :] = orders[: bsz // 2]
+
+        indices = list(range(num_iter))
+        if progress:
+            indices = tqdm(indices)
+
+        # past key values can be prepared outside (usually in multi-turn editing)
+        if past_key_values is None:
+            output = self.llm_model(
+                inputs_embeds=inputs_embeds,
+                attention_mask=None,
+                position_ids=None,
+                past_key_values=DynamicCache.from_legacy_cache(None),
+                return_dict=True,
+                use_cache=True,
+            )
+            past_key_values = output.past_key_values
+
+        # generate latents
+        for step in indices:
+            cur_tokens = tokens.clone()
+            x_enc = self.forward_mae_encoder(
+                tokens.view(bsz, m, n, -1),
+                mask.to(self.dtype),
+                past_key_values=past_key_values,
+                # inputs_embeds=inputs_embeds,
+                attention_mask=attention_mask,
+            )
+            # import pdb; pdb.set_trace()
+            self.curtail_cache(past_key_values, inputs_embeds.shape[1])
+            # import pdb; pdb.set_trace()
+
+            z = self.mar.forward_mae_decoder(x_enc, mask.to(self.dtype), image_shape=(m, n), x_con=x_con)
+
+            # mask ratio for the next round, following MaskGIT and MAGE.
+            mask_ratio = np.cos(math.pi / 2.0 * (step + 1) / num_iter)
+            mask_len = torch.Tensor([np.floor(m * n * mask_ratio)]).to(self.device)
+
+            # masks out at least one for the next iteration
+            mask_len = torch.maximum(
+                torch.Tensor([1]).to(self.device),
+                torch.minimum(torch.sum(mask, dim=-1, keepdims=True) - 1, mask_len),
+            )
+
+            # get masking for next iteration and locations to be predicted in this iteration
+            mask_next = mask_by_order(mask_len[0], orders, bsz, m * n).to(self.device)
+            if cfg != 1.0:
+                mask_next[bsz // 2 :] = mask_next[: bsz // 2]
+            if step >= num_iter - 1:
+                mask_to_pred = mask[:bsz].bool()
+            else:
+                mask_to_pred = torch.logical_xor(mask[:bsz].bool(), mask_next.bool())
+            mask = mask_next
+            # if not cfg == 1.0:
+            #     mask_to_pred = torch.cat([mask_to_pred, mask_to_pred], dim=0)
+
+            # sample token latents for this step
+            z = z[mask_to_pred.nonzero(as_tuple=True)]
+            # cfg schedule follow Muse
+            if cfg_schedule == "linear":
+                cfg_iter = 1 + (cfg - 1) * (m * n - mask_len[0]) / (m * n)
+            elif cfg_schedule == "constant":
+                cfg_iter = cfg
+            else:
+                raise NotImplementedError
+            sampled_token_latent = self.mar.diffloss.sample(z, temperature, cfg_iter).to(self.dtype)
+            # if not cfg == 1.0:
+            #     sampled_token_latent, _ = sampled_token_latent.chunk(2, dim=0)  # Remove null class samples
+            #     mask_to_pred, _ = mask_to_pred.chunk(2, dim=0)
+
+            cur_tokens[mask_to_pred.nonzero(as_tuple=True)] = sampled_token_latent
+            if cfg != 1.0:
+                cur_tokens[bsz // 2 :] = cur_tokens[: bsz // 2]
+            tokens = cur_tokens.clone()
+
+        pred = self.decode(tokens.view(bsz, m, n, -1))
+
+        if cfg != 1.0:
+            pred = pred[: bsz // 2]
+        return pred
+
+
+class HarmonDev(Harmon):
+    def __init__(
+        self,
+        grad_scale=0.1,
+        loss_weights={"image2text": 1.0, "text2image": 1.0},
+        pretrained_pth=None,
+        freeze_llm=False,
+        gradient_checkpointing=True,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+        self.grad_scale = grad_scale
+        self.loss_weights = loss_weights
+
+        # Store image token index
+        # NB: Need to import here to avoid circular imports
+        import modal_aphasia.harmon.utils as _utils
+
+        self.image_token_index = int(self.tokenizer.encode(_utils.DEFAULT_IMAGE_TOKEN, add_special_tokens=False)[-1])
+
+        if pretrained_pth is not None:
+            pretrained_state_dict = guess_load_checkpoint(pretrained_pth)
+            info = self.load_state_dict(pretrained_state_dict, strict=False)
+            # print_log(f"Load pretrained weight from {pretrained_pth}")
+
+        if freeze_llm:
+            self.llm.requires_grad_(False)
+
+        # gradient checkpointing
+        if gradient_checkpointing:
+            self.gradient_checkpointing_enable()
+        else:
+            self.gradient_checkpointing_disable()
+
+    def gradient_checkpointing_disable(self):
+        self.llm.gradient_checkpointing_disable()
+        self.mar.gradient_checkpointing_disable()
+
+    def gradient_checkpointing_enable(self):
+        self.llm.gradient_checkpointing_enable()
+        self.mar.gradient_checkpointing_enable()
+
+    def state_dict(self, *args, **kwargs):
+        state_dict = super().state_dict(*args, **kwargs)
+        state_dict = {k: v for k, v in state_dict.items() if "vae." not in k}
+
+        return state_dict
+
+    def train(self: T, mode: bool = True) -> T:
+        super().train(mode=mode)
+        self.vae.train(mode=False)
+        return self
+
+    def text2image_loss(self, input_ids, attention_mask, pixel_values):
+        x = pixel_values.to(dtype=self.dtype, device=self.device)
+        x = self.encode(x)  # b m n c
+        b, m, n, _ = x.shape
+        gt_latents = x.clone().detach().view(b, m * n, -1)
+
+        orders = self.mar.sample_orders(bsz=b, seq_len=m * n)
+        mask = self.mar.random_masking(x.flatten(1, 2), orders)
+
+        input_ids = input_ids.to(self.device)
+        attention_mask = attention_mask.to(self.device)
+        x_enc = self.forward_mae_encoder(x, mask, input_ids=input_ids, attention_mask=attention_mask)
+        z = self.mar.forward_mae_decoder(x_enc, mask, image_shape=(m, n))
+
+        loss = self.mar.forward_loss(z=z, target=gt_latents, mask=mask)
+
+        return loss
+
+    def image2text_loss(self, input_ids, attention_mask, labels, pixel_values) -> transformers.modeling_outputs.CausalLMOutput:
+        input_ids = input_ids.to(self.device)
+        attention_mask = attention_mask.to(self.device)
+        labels = labels.to(self.device)
+
+        pixel_values = pixel_values.to(dtype=self.dtype, device=self.device)
+        x = self.encode(pixel_values)  # b m n c
+        _, z_enc = self.extract_visual_feature(x)
+
+        if self.grad_scale is not None:
+            z_enc = _ScaleGradient.apply(z_enc, self.grad_scale)
+
+        inputs_embeds = z_enc.new_zeros(*input_ids.shape, self.llm.config.hidden_size)
+        inputs_embeds[input_ids == self.image_token_index] = z_enc.flatten(0, 1)
+        inputs_embeds[input_ids != self.image_token_index] = self.llm.get_input_embeddings()(
+            input_ids[input_ids != self.image_token_index]
+        )
+
+        output = self.llm_model(inputs_embeds=inputs_embeds, attention_mask=attention_mask, return_dict=True)
+
+        last_hidden_state = output.last_hidden_state[:, :-1]
+        labels = labels[:, 1:]
+        last_hidden_state = last_hidden_state[labels >= 0]
+        labels = labels[labels >= 0]
+        logits = self.llm.get_output_embeddings()(last_hidden_state)
+
+        loss = F.cross_entropy(input=logits, target=labels)
+
+        return transformers.modeling_outputs.CausalLMOutput(loss=loss, logits=logits)
+
+    def text2text_loss(self, input_ids, attention_mask, labels):
+        inputs_embeds = self.llm.get_input_embeddings()(input_ids)
+        output = self.llm_model(
+            inputs_embeds=inputs_embeds, attention_mask=attention_mask, return_dict=True
+        )
+
+        last_hidden_state = output.last_hidden_state[:, :-1]
+        labels = labels[:, 1:]
+        last_hidden_state = last_hidden_state[labels >= 0]
+        labels = labels[labels >= 0]
+        logits = self.llm.get_output_embeddings()(last_hidden_state)
+
+        return F.cross_entropy(input=logits, target=labels)
+
+    def forward(self, input_ids, attention_mask, loss_type: str, labels: torch.Tensor | None = None, **kwargs):
+        if loss_type == "text2image":
+            return (self.text2image_loss(input_ids=input_ids, attention_mask=attention_mask, pixel_values=kwargs["pixel_values"]),)
+        elif loss_type == "image2text":
+            return self.image2text_loss(input_ids=input_ids, attention_mask=attention_mask, labels=labels, pixel_values=kwargs["pixel_values"])
+        elif loss_type == "text2text":
+            return (self.text2text_loss(input_ids=input_ids, attention_mask=attention_mask, labels=labels),)
+        else:
+            raise NotImplementedError(f"Loss type {loss_type[0]} not implemented.")

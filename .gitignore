@@ -1,0 +1,71 @@
+# Dataset files
+dataset.json
+eval_dataset.json
+
+# Default data dir
+/data/
+
+# Plots
+/plots/
+
+# Environment variables
+.env
+
+# Images folder
+images/
+
+# Temporary results for convenience
+/results/
+/results
+test*.ipynb
+configs/_*/
+/_*/
+
+# wandb
+wandb/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+# .venv without slash for symlinking uv virtualenv across partitions
+.venv
+venv/
+env/
+ENV/
+
+# IDE files
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Utils folder (untracked)
+utils/
+
+# Eval
+inference_text2image.jsonl
+evals/classification_results.json
+evals/analysis_results/
+evals/testing
+
+# Real-world
+real_world/data
+real_world/results
+
+# Faces
+faces/data
+faces/datasets
+faces/see_faces.ipynb
