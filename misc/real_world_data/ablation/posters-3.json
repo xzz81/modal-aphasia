@@ -1,0 +1,2571 @@
+{
+  "metadata": {
+    "raw_data_file": "data/results/visualisation3/grade_visual_anthropic-claude-opus-4.1/graded.json",
+    "rubric_file": "data/results/visualisation3/grade_visual_anthropic-claude-opus-4.1/deduplicated_rubric_graded.json",
+    "total_posters": 9,
+    "model": "anthropic/claude-opus-4.1",
+    "counts_fixed": true,
+    "fixes_applied": 18,
+    "irregularities_found": 81
+  },
+  "posters": {
+    "2": {
+      "poster_name": "The Dark Knight (2008)",
+      "poster_id": "2",
+      "text_description": "The **theatrical release version of the U.S. poster for *The Dark Knight* (2008)** shows **Batman** standing in front of a tall, dark building at night.\n\nHe is seen from **behind**, slightly turned to the **left**, so part of his chest and the bat emblem on his suit are visible. He is wearing the **black armored Batsuit** with a cape hanging down to his legs, and his head is turned forward, facing the building.\n\nThe **building** behind him is a **modern skyscraper**, its **windows illuminated** in a grid pattern. Near the **center of the building**, several windows are **broken and scorched**, forming the **shape of the Batman symbol** — a large **bat-shaped burn mark** made of **orange flames and smoke**. The glowing symbol gives off light that reflects faintly on Batman’s back and cape.\n\nThe **surrounding area** is **dark blue-gray**, suggesting nighttime and possibly light rain or haze. The **ground level** shows **debris and firelight reflections**, indicating destruction or chaos below.\n\nAt the **top of the poster**, the main text reads in all caps:\n**\"WELCOME TO A WORLD WITHOUT RULES.\"**\n\nAt the **bottom**, the **title “THE DARK KNIGHT”** appears in a bold, metallic font, with the **Bat symbol** placed directly beneath or integrated behind the title. Below that is a **credit block** listing the main actors and production team in small type, and the **release date “JULY 18”** is printed near the bottom center.\n\nNo other characters are shown — only **Batman, the burning bat symbol on the building,** and **text elements** as described.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/2.jpg",
+      "original_image": "misc/real_world_data/original_posters/2.jpg",
+      "positive_requirements": [
+        "A bat symbol should be integrated with the title at the bottom",
+        "A modern skyscraper with illuminated windows should be present",
+        "Batman should be facing forward/toward the viewer",
+        "Batman should be positioned at bottom center",
+        "Batman should be looking up",
+        "Batman should be wearing a black armored Batsuit",
+        "Batman should be wearing a cape",
+        "Batman's bat emblem should be visible on his chest",
+        "Broken and scorched windows should form a bat shape on the building",
+        "Debris should be visible falling in the scene",
+        "Embers should be visible falling in the scene",
+        "Orange flames should be visible near the center of the bat symbol",
+        "Smoke should be visible near the center of the bat symbol",
+        "The building structure should show clear architectural details",
+        "The scene should have a dark blue-gray nighttime setting",
+        "The title 'THE DARK KNIGHT' should be present at bottom"
+      ],
+      "negative_requirements": [],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "A bat symbol should be integrated with the title at the bottom",
+            "status": "CORRECT",
+            "explanation": "Text states 'the Bat symbol placed directly beneath or integrated behind the title'"
+          },
+          {
+            "requirement": "A modern skyscraper with illuminated windows should be present",
+            "status": "CORRECT",
+            "explanation": "Text describes 'a modern skyscraper, its windows illuminated in a grid pattern'"
+          },
+          {
+            "requirement": "Batman should be facing forward/toward the viewer",
+            "status": "INCORRECT",
+            "explanation": "Text states Batman is 'seen from behind' with 'his head turned forward, facing the building', not toward the viewer"
+          },
+          {
+            "requirement": "Batman should be positioned at bottom center",
+            "status": "MISSING",
+            "explanation": "Text does not specify Batman's position as bottom center"
+          },
+          {
+            "requirement": "Batman should be looking up",
+            "status": "MISSING",
+            "explanation": "Text states Batman is 'facing the building' forward, not specifically looking up"
+          },
+          {
+            "requirement": "Batman should be wearing a black armored Batsuit",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'wearing the black armored Batsuit'"
+          },
+          {
+            "requirement": "Batman should be wearing a cape",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'with a cape hanging down to his legs'"
+          },
+          {
+            "requirement": "Batman's bat emblem should be visible on his chest",
+            "status": "CORRECT",
+            "explanation": "Text states 'the bat emblem on his suit are visible'"
+          },
+          {
+            "requirement": "Broken and scorched windows should form a bat shape on the building",
+            "status": "CORRECT",
+            "explanation": "Text describes 'windows are broken and scorched, forming the shape of the Batman symbol'"
+          },
+          {
+            "requirement": "Debris should be visible falling in the scene",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'debris' at ground level but not falling debris"
+          },
+          {
+            "requirement": "Embers should be visible falling in the scene",
+            "status": "MISSING",
+            "explanation": "Text does not mention embers falling in the scene"
+          },
+          {
+            "requirement": "Orange flames should be visible near the center of the bat symbol",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'a bat-shaped burn mark made of orange flames and smoke'"
+          },
+          {
+            "requirement": "Smoke should be visible near the center of the bat symbol",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'a bat-shaped burn mark made of orange flames and smoke'"
+          },
+          {
+            "requirement": "The building structure should show clear architectural details",
+            "status": "CORRECT",
+            "explanation": "Text only mentions it's a modern skyscraper with illuminated windows"
+          },
+          {
+            "requirement": "The scene should have a dark blue-gray nighttime setting",
+            "status": "CORRECT",
+            "explanation": "Text states 'The surrounding area is dark blue-gray, suggesting nighttime'"
+          },
+          {
+            "requirement": "The title 'THE DARK KNIGHT' should be present at bottom",
+            "status": "CORRECT",
+            "explanation": "Text states 'At the bottom, the title THE DARK KNIGHT appears'"
+          }
+        ],
+        "scores": {
+          "correct": 12,
+          "correct_pct": 75.0,
+          "incorrect": 1,
+          "incorrect_pct": 6.2,
+          "missing": 3,
+          "missing_pct": 18.8,
+          "positive_negative_breakdown": {
+            "positive_correct": 12,
+            "positive_incorrect": 1,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "A bat symbol should be integrated with the title at the bottom",
+            "status": "CORRECT",
+            "explanation": "A blue bat symbol is clearly integrated with 'THE DARK KNIGHT' title at the bottom of the poster"
+          },
+          {
+            "requirement": "A modern skyscraper with illuminated windows should be present",
+            "status": "CORRECT",
+            "explanation": "A modern skyscraper with lit windows is visible in the background"
+          },
+          {
+            "requirement": "Batman should be facing forward/toward the viewer",
+            "status": "CORRECT",
+            "explanation": "Batman appears to be facing to the viewer"
+          },
+          {
+            "requirement": "Batman should be positioned at bottom center",
+            "status": "CORRECT",
+            "explanation": "Batman is positioned at the bottom center of the poster"
+          },
+          {
+            "requirement": "Batman should be looking up",
+            "status": "CORRECT",
+            "explanation": "Batman's posture suggests he is looking upward at the burning building"
+          },
+          {
+            "requirement": "Batman should be wearing a black armored Batsuit",
+            "status": "CORRECT",
+            "explanation": "Batman is wearing what appears to be a dark/black armored suit"
+          },
+          {
+            "requirement": "Batman should be wearing a cape",
+            "status": "CORRECT",
+            "explanation": "A cape is visible on Batman's figure"
+          },
+          {
+            "requirement": "Batman's bat emblem should be visible on his chest",
+            "status": "CORRECT",
+            "explanation": "The bat emblem is visible"
+          },
+          {
+            "requirement": "Broken and scorched windows should form a bat shape on the building",
+            "status": "CORRECT",
+            "explanation": "The burning/damaged section of the building clearly forms a bat shape"
+          },
+          {
+            "requirement": "Debris should be visible falling in the scene",
+            "status": "CORRECT",
+            "explanation": "Debris/particles are visible falling from the burning building"
+          },
+          {
+            "requirement": "Embers should be visible falling in the scene",
+            "status": "CORRECT",
+            "explanation": "Orange embers/sparks are visible falling in the scene"
+          },
+          {
+            "requirement": "Orange flames should be visible near the center of the bat symbol",
+            "status": "CORRECT",
+            "explanation": "Orange flames are clearly visible in the bat-shaped burning area on the building"
+          },
+          {
+            "requirement": "Smoke should be visible near the center of the bat symbol",
+            "status": "CORRECT",
+            "explanation": "Dark smoke is visible around the burning bat shape on the building"
+          },
+          {
+            "requirement": "The building structure should show clear architectural details",
+            "status": "CORRECT",
+            "explanation": "The building shows clear architectural details including windows and structural elements"
+          },
+          {
+            "requirement": "The scene should have a dark blue-gray nighttime setting",
+            "status": "CORRECT",
+            "explanation": "The scene has a dark blue-gray nighttime atmosphere"
+          },
+          {
+            "requirement": "The title 'THE DARK KNIGHT' should be present at bottom",
+            "status": "CORRECT",
+            "explanation": "'THE DARK KNIGHT' title is clearly visible at the bottom of the poster"
+          }
+        ],
+        "scores": {
+          "correct": 16,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 16,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 12,
+        "text_correct_pct": 75.0,
+        "text_incorrect": 1,
+        "text_incorrect_pct": 6.2,
+        "text_missing": 3,
+        "text_missing_pct": 18.8,
+        "image_correct": 16,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 16,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 12,
+            "positive_incorrect": 1,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          },
+          "image": {
+            "positive_correct": 16,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 16,
+            "negative_rubric": 0
+          }
+        }
+      }
+    },
+    "3": {
+      "poster_name": "The Matrix (1999)",
+      "poster_id": "3",
+      "text_description": "The theatrical release version of the **U.S. poster for *The Matrix* (1999)** shows the four main characters standing in a group against a stylized, vertically streaked, blue-gray background. The background gives the impression of a wet city alley or corridor, with faint outlines of tall walls or buildings receding behind them.\n\nAt the **center front** stands **Neo (Keanu Reeves)**. He is wearing a long black trench coat made of leather-like material, reaching almost to his ankles, and black pants. His shirt underneath is dark, and he has a gun holster visible at his sides. He is wearing **small, oval-shaped black sunglasses** and has a neutral, slightly tense expression. His arms hang by his sides.\n\nTo **Neo’s right** (the viewer’s left) stands **Trinity (Carrie-Anne Moss)**. She is also wearing an entirely black outfit, tight-fitting and shiny, like latex or vinyl. She has short-cropped hair, also wears dark oval sunglasses, and her stance is confident and slightly angled forward. Her right hand is partially visible near her waist, and she appears ready for action.\n\nTo **Neo’s left** (the viewer’s right) stands **Morpheus (Laurence Fishburne)**. He is bald and wears **small, round sunglasses** with dark lenses. His clothing consists of a long, textured purple coat with a high collar, and a dark tie or shirt underneath. His posture is upright, hands down by his sides, looking directly forward.\n\nFurther to **Morpheus’s left**, slightly behind the others, is **Cypher (Joe Pantoliano)**. He is also dressed in dark clothing with a coat, wearing sunglasses, and standing slightly in the background, with his body turned slightly to the side.\n\nAbove them, at the top of the poster, appears the **movie title**:\n\n> **THE MATRIX**\n\nThe title is written in large, capitalized, light blue letters, with a slightly segmented, digital-looking typeface.\n\nBelow the title, along the **bottom edge of the poster**, is the standard **credit block** with actor names, director, producers, and other production information, all in small white or light-gray font. The **Warner Bros. logo** and the **Village Roadshow Pictures logo** are also located near the bottom.\n\nNo weapons are directly visible being held in their hands in this poster version. The overall composition is symmetrical, with Neo at the center, Morpheus and Trinity flanking him, and Cypher slightly behind. The entire group faces the viewer directly. The lighting highlights the characters sharply against the desaturated background.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/3.jpg",
+      "original_image": "misc/real_world_data/original_posters/3.jpg",
+      "positive_requirements": [
+        "All four main characters should wear dark clothing",
+        "At least one character should be visibly holding a weapon",
+        "Characters should be arranged in a triangular composition",
+        "Cypher should be positioned further left of Morpheus, slightly behind",
+        "Cypher should wear dark clothing with a coat and sunglasses",
+        "Lighting should highlight the characters sharply against the background",
+        "Morpheus should be bald and wear small round sunglasses",
+        "Morpheus should be positioned on Neo's right (viewer's left)",
+        "Morpheus should wear a gray/silver long textured coat",
+        "Multiple characters should wear sunglasses",
+        "Neo should be positioned in the center front of the poster",
+        "Neo should wear a long black trench coat, black pants, and small oval-shaped black sunglasses",
+        "The Matrix title should be in large, capitalized white/silver/blue letters",
+        "The background should be stylized with vertical streaks in blue-gray tones",
+        "The background should have a digital rain effect in blue/green colors",
+        "The entire group should face the viewer directly",
+        "Trinity should be positioned on Neo's left (viewer's right)",
+        "Trinity should wear a black tight-fitting shiny outfit with short-cropped hair and dark oval sunglasses",
+        "The poster should show all characters with weapons"
+      ],
+      "negative_requirements": [],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "All four main characters should wear dark clothing",
+            "status": "CORRECT",
+            "explanation": "Text describes all four characters wearing dark clothing - Neo in black trench coat, Trinity in black outfit, Morpheus in purple coat with dark tie/shirt, Cypher in dark clothing with coat"
+          },
+          {
+            "requirement": "At least one character should be visibly holding a weapon",
+            "status": "INCORRECT",
+            "explanation": "Text explicitly states 'No weapons are directly visible being held in their hands in this poster version'"
+          },
+          {
+            "requirement": "Characters should be arranged in a triangular composition",
+            "status": "CORRECT",
+            "explanation": "Text describes arrangement as 'symmetrical, with Neo at the center, Morpheus and Trinity flanking him, and Cypher slightly behind' - not specifically triangular"
+          },
+          {
+            "requirement": "Cypher should be positioned further left of Morpheus, slightly behind",
+            "status": "CORRECT",
+            "explanation": "Text states 'Further to Morpheus's left, slightly behind the others, is Cypher'"
+          },
+          {
+            "requirement": "Cypher should wear dark clothing with a coat and sunglasses",
+            "status": "CORRECT",
+            "explanation": "Text describes Cypher as 'dressed in dark clothing with a coat, wearing sunglasses'"
+          },
+          {
+            "requirement": "Lighting should highlight the characters sharply against the background",
+            "status": "CORRECT",
+            "explanation": "Text states 'The lighting highlights the characters sharply against the desaturated background'"
+          },
+          {
+            "requirement": "Morpheus should be bald and wear small round sunglasses",
+            "status": "CORRECT",
+            "explanation": "Text describes Morpheus as 'bald and wears small, round sunglasses with dark lenses'"
+          },
+          {
+            "requirement": "Morpheus should be positioned on Neo's right (viewer's left)",
+            "status": "INCORRECT",
+            "explanation": "Text states Morpheus is 'To Neo's left (the viewer's right)' which is the opposite of this requirement"
+          },
+          {
+            "requirement": "Morpheus should wear a gray/silver long textured coat",
+            "status": "INCORRECT",
+            "explanation": "Text describes Morpheus wearing 'a long, textured purple coat' not gray/silver"
+          },
+          {
+            "requirement": "Multiple characters should wear sunglasses",
+            "status": "CORRECT",
+            "explanation": "Text mentions Neo, Trinity, Morpheus, and Cypher all wearing sunglasses"
+          },
+          {
+            "requirement": "Neo should be positioned in the center front of the poster",
+            "status": "CORRECT",
+            "explanation": "Text states 'At the center front stands Neo'"
+          },
+          {
+            "requirement": "Neo should wear a long black trench coat, black pants, and small oval-shaped black sunglasses",
+            "status": "CORRECT",
+            "explanation": "Text describes Neo wearing 'a long black trench coat...black pants' and 'small, oval-shaped black sunglasses'"
+          },
+          {
+            "requirement": "The Matrix title should be in large, capitalized white/silver/blue letters",
+            "status": "CORRECT",
+            "explanation": "Text describes title as 'written in large, capitalized, light blue letters' not white/silver"
+          },
+          {
+            "requirement": "The background should be stylized with vertical streaks in blue-gray tones",
+            "status": "CORRECT",
+            "explanation": "Text describes 'stylized, vertically streaked, blue-gray background'"
+          },
+          {
+            "requirement": "The background should have a digital rain effect in blue/green colors",
+            "status": "INCORRECT",
+            "explanation": "Text does not mention any digital rain effect, only vertical streaks"
+          },
+          {
+            "requirement": "The entire group should face the viewer directly",
+            "status": "CORRECT",
+            "explanation": "Text states 'The entire group faces the viewer directly'"
+          },
+          {
+            "requirement": "Trinity should be positioned on Neo's left (viewer's right)",
+            "status": "INCORRECT",
+            "explanation": "Text states Trinity is 'To Neo's right (the viewer's left)' which is opposite of this requirement"
+          },
+          {
+            "requirement": "Trinity should wear a black tight-fitting shiny outfit with short-cropped hair and dark oval sunglasses",
+            "status": "CORRECT",
+            "explanation": "Text describes Trinity wearing 'entirely black outfit, tight-fitting and shiny' with 'short-cropped hair' and 'dark oval sunglasses'"
+          },
+          {
+            "requirement": "The poster should show all characters with weapons",
+            "status": "INCORRECT",
+            "explanation": "Text states 'No weapons are directly visible being held in their hands' which violates this NOT requirement that implies weapons should be visible"
+          }
+        ],
+        "scores": {
+          "correct": 13,
+          "correct_pct": 68.4,
+          "incorrect": 6,
+          "incorrect_pct": 31.6,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 13,
+            "positive_incorrect": 6,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "All four main characters should wear dark clothing",
+            "status": "CORRECT",
+            "explanation": "All four visible characters are wearing dark clothing - black and dark gray outfits"
+          },
+          {
+            "requirement": "At least one character should be visibly holding a weapon",
+            "status": "CORRECT",
+            "explanation": "The character on the far left appears to be holding a weapon"
+          },
+          {
+            "requirement": "Characters should be arranged in a triangular composition",
+            "status": "CORRECT",
+            "explanation": "The characters form a triangular arrangement with Neo at the front center"
+          },
+          {
+            "requirement": "Cypher should be positioned further left of Morpheus, slightly behind",
+            "status": "CORRECT",
+            "explanation": "The leftmost character appears to be positioned further left and behind Morpheus"
+          },
+          {
+            "requirement": "Cypher should wear dark clothing with a coat and sunglasses",
+            "status": "CORRECT",
+            "explanation": "The leftmost character wears dark clothing with what appears to be a coat and sunglasses"
+          },
+          {
+            "requirement": "Lighting should highlight the characters sharply against the background",
+            "status": "CORRECT",
+            "explanation": "The characters are clearly highlighted against the darker background"
+          },
+          {
+            "requirement": "Morpheus should be bald and wear small round sunglasses",
+            "status": "CORRECT",
+            "explanation": "The character to Neo's left is bald and appears to wear sunglasses"
+          },
+          {
+            "requirement": "Morpheus should be positioned on Neo's right (viewer's left)",
+            "status": "CORRECT",
+            "explanation": "The bald character (Morpheus) is positioned to Neo's right, which is the viewer's left"
+          },
+          {
+            "requirement": "Morpheus should wear a gray/silver long textured coat",
+            "status": "CORRECT",
+            "explanation": "Morpheus appears to be wearing a gray/silver colored coat"
+          },
+          {
+            "requirement": "Multiple characters should wear sunglasses",
+            "status": "CORRECT",
+            "explanation": "At least three characters appear to be wearing sunglasses"
+          },
+          {
+            "requirement": "Neo should be positioned in the center front of the poster",
+            "status": "CORRECT",
+            "explanation": "Neo is clearly positioned in the center front of the composition"
+          },
+          {
+            "requirement": "Neo should wear a long black trench coat, black pants, and small oval-shaped black sunglasses",
+            "status": "CORRECT",
+            "explanation": "Neo is wearing a long black coat, dark pants, and sunglasses"
+          },
+          {
+            "requirement": "The Matrix title should be in large, capitalized white/silver/blue letters",
+            "status": "CORRECT",
+            "explanation": "The title 'MATRIX' appears in large, capitalized white/silver letters"
+          },
+          {
+            "requirement": "The background should be stylized with vertical streaks in blue-gray tones",
+            "status": "CORRECT",
+            "explanation": "The background shows vertical streaking effects in blue-gray tones"
+          },
+          {
+            "requirement": "The background should have a digital rain effect in blue/green colors",
+            "status": "CORRECT",
+            "explanation": "The background displays the characteristic digital rain effect in blue/green tones"
+          },
+          {
+            "requirement": "The entire group should face the viewer directly",
+            "status": "CORRECT",
+            "explanation": "All characters are facing toward the viewer"
+          },
+          {
+            "requirement": "Trinity should be positioned on Neo's left (viewer's right)",
+            "status": "CORRECT",
+            "explanation": "The female character (Trinity) is positioned on Neo's left, which is the viewer's right"
+          },
+          {
+            "requirement": "Trinity should wear a black tight-fitting shiny outfit with short-cropped hair and dark oval sunglasses",
+            "status": "CORRECT",
+            "explanation": "Trinity appears to wear a black shiny outfit with short hair and sunglasses"
+          },
+          {
+            "requirement": "The poster should show all characters with weapons",
+            "status": "INCORRECT",
+            "explanation": "Not all characters are visibly holding a weapon"
+          }
+        ],
+        "scores": {
+          "correct": 18,
+          "correct_pct": 94.7,
+          "incorrect": 1,
+          "incorrect_pct": 5.3,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 18,
+            "positive_incorrect": 1,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 13,
+        "text_correct_pct": 68.4,
+        "text_incorrect": 6,
+        "text_incorrect_pct": 31.6,
+        "text_missing": 0,
+        "text_missing_pct": 0.0,
+        "image_correct": 18,
+        "image_correct_pct": 94.7,
+        "image_incorrect": 1,
+        "image_incorrect_pct": 5.3,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 19,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 13,
+            "positive_incorrect": 6,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          },
+          "image": {
+            "positive_correct": 18,
+            "positive_incorrect": 1,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 19,
+            "negative_rubric": 0
+          }
+        }
+      }
+    },
+    "7": {
+      "poster_name": "Inception (2010)",
+      "poster_id": "7",
+      "text_description": "The poster shows several people standing in the middle of a city street that is partially submerged in water. The street is wide and straight, stretching back toward the horizon. The tall buildings on both sides are modern, made of glass and concrete, and they appear to rise vertically but also curve slightly inward at the top, suggesting that the city itself is folding or bending. The pavement in the foreground is dark, reflecting light as if wet.\n\nThere are six figures visible, standing in a loose formation, facing slightly different directions. The central figure, Leonardo DiCaprio’s character, is positioned in front, slightly separated from the others. He is wearing a dark suit and holding a pistol in his right hand, which hangs by his side. The other figures — also in formal or casual business attire — are scattered behind and beside him. One of them, to the left, also appears to be holding a weapon.\n\nIn the background, cars are partly submerged in the flooded street, and the water level reaches about halfway up their doors. The light in the scene is dim, bluish-gray, resembling early morning or dusk. The title **“INCEPTION”** is written in bold red capital letters near the bottom center of the poster. Above it, in smaller white text, is the tagline: **“YOUR MIND IS THE SCENE OF THE CRIME.”** Near the top, the actor names appear in white, spread out across the width of the poster: *Leonardo DiCaprio, Ken Watanabe, Joseph Gordon-Levitt, Marion Cotillard, Ellen Page, Tom Hardy, Cillian Murphy, Tom Berenger, and Michael Caine.*\n\nAt the very bottom, there is standard billing text with credits and the release information, also in white. The overall composition centers on the figures and the warped city background, giving equal prominence to both the people and the surreal cityscape.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/7.jpg",
+      "original_image": "misc/real_world_data/original_posters/7.jpg",
+      "positive_requirements": [
+        "All characters should be wearing business attire",
+        "Architectural details and windows should create a folded city illusion",
+        "Buildings should appear upside down at unusual angles",
+        "Character should be holding a pistol in right hand",
+        "Character should be positioned centrally in the foreground",
+        "Character should be wearing a dark suit",
+        "Six characters should be present in the poster",
+        "The INCEPTION title should be in red letters",
+        "The INCEPTION title should be positioned at the bottom",
+        "The character to the central figure's left should be holding a weapon",
+        "The overall lighting should be dim with bluish-gray tones",
+        "The street pavement should be dark",
+        "The street should have a dramatic sense of depth bending upward",
+        "Trees should be visible on the right side of the street",
+        "Characters should be spread horizontally apart"
+      ],
+      "negative_requirements": [
+        "Cars should NOT be submerged in water",
+        "The street should NOT be flooded"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "All characters should be wearing business attire",
+            "status": "CORRECT",
+            "explanation": "Text mentions characters are in 'formal or casual business attire' and the central figure wears a 'dark suit'"
+          },
+          {
+            "requirement": "Architectural details and windows should create a folded city illusion",
+            "status": "CORRECT",
+            "explanation": "Text mentions buildings 'curve slightly inward at the top' and city is 'folding or bending' but doesn't specifically describe how architectural details and windows create this illusion"
+          },
+          {
+            "requirement": "Buildings should appear upside down at unusual angles",
+            "status": "MISSING",
+            "explanation": "Text does not mention buildings being upside down, only that they 'curve slightly inward at the top'"
+          },
+          {
+            "requirement": "Character should be holding a pistol in right hand",
+            "status": "CORRECT",
+            "explanation": "Text explicitly states the central figure is 'holding a pistol in his right hand'"
+          },
+          {
+            "requirement": "Character should be positioned centrally in the foreground",
+            "status": "CORRECT",
+            "explanation": "Text states 'The central figure, Leonardo DiCaprio's character, is positioned in front'"
+          },
+          {
+            "requirement": "Character should be wearing a dark suit",
+            "status": "CORRECT",
+            "explanation": "Text explicitly mentions the central figure is 'wearing a dark suit'"
+          },
+          {
+            "requirement": "Six characters should be present in the poster",
+            "status": "CORRECT",
+            "explanation": "Text clearly states 'There are six figures visible'"
+          },
+          {
+            "requirement": "The INCEPTION title should be in red letters",
+            "status": "CORRECT",
+            "explanation": "Text states 'The title **INCEPTION** is written in bold red capital letters'"
+          },
+          {
+            "requirement": "The INCEPTION title should be positioned at the bottom",
+            "status": "CORRECT",
+            "explanation": "Text mentions the title is 'near the bottom center of the poster'"
+          },
+          {
+            "requirement": "The character to the central figure's left should be holding a weapon",
+            "status": "CORRECT",
+            "explanation": "Text states 'One of them, to the left, also appears to be holding a weapon'"
+          },
+          {
+            "requirement": "The overall lighting should be dim with bluish-gray tones",
+            "status": "CORRECT",
+            "explanation": "Text describes 'The light in the scene is dim, bluish-gray'"
+          },
+          {
+            "requirement": "The street pavement should be dark",
+            "status": "CORRECT",
+            "explanation": "Text states 'The pavement in the foreground is dark'"
+          },
+          {
+            "requirement": "The street should have a dramatic sense of depth bending upward",
+            "status": "MISSING",
+            "explanation": "Text describes the street as 'wide and straight, stretching back toward the horizon' without mentioning upward bending"
+          },
+          {
+            "requirement": "Trees should be visible on the right side of the street",
+            "status": "MISSING",
+            "explanation": "Text does not mention any trees"
+          },
+          {
+            "requirement": "Cars should NOT be submerged in water",
+            "status": "INCORRECT",
+            "explanation": "Text explicitly states 'cars are partly submerged in the flooded street'"
+          },
+          {
+            "requirement": "Characters should be spread horizontally apart",
+            "status": "CORRECT",
+            "explanation": "Text describes characters as 'scattered behind and beside him' and in a 'loose formation', indicating they are spread apart"
+          },
+          {
+            "requirement": "The street should NOT be flooded",
+            "status": "INCORRECT",
+            "explanation": "Text explicitly mentions 'the flooded street' and water reaching 'halfway up their doors'"
+          }
+        ],
+        "scores": {
+          "correct": 12,
+          "correct_pct": 70.6,
+          "incorrect": 2,
+          "incorrect_pct": 11.8,
+          "missing": 3,
+          "missing_pct": 17.6,
+          "positive_negative_breakdown": {
+            "positive_correct": 12,
+            "positive_incorrect": 0,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 2
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "All characters should be wearing business attire",
+            "status": "CORRECT",
+            "explanation": "All visible characters appear to be wearing suits and formal business clothing"
+          },
+          {
+            "requirement": "Architectural details and windows should create a folded city illusion",
+            "status": "CORRECT",
+            "explanation": "The buildings above show windows and architecture that appear to fold over, creating the surreal folded city effect"
+          },
+          {
+            "requirement": "Buildings should appear upside down at unusual angles",
+            "status": "CORRECT",
+            "explanation": "The buildings at the top of the image appear inverted and at unusual angles, creating the folded city effect"
+          },
+          {
+            "requirement": "Character should be holding a pistol in right hand",
+            "status": "CORRECT",
+            "explanation": "The central character does appear to be holding a visible pistol in their right hand"
+          },
+          {
+            "requirement": "Character should be positioned centrally in the foreground",
+            "status": "CORRECT",
+            "explanation": "There is a central character positioned in the foreground of the image"
+          },
+          {
+            "requirement": "Character should be wearing a dark suit",
+            "status": "CORRECT",
+            "explanation": "The central character appears to be wearing a dark suit"
+          },
+          {
+            "requirement": "Six characters should be present in the poster",
+            "status": "CORRECT",
+            "explanation": "6 characters are clearly visible in the generated image"
+          },
+          {
+            "requirement": "The INCEPTION title should be in red letters",
+            "status": "CORRECT",
+            "explanation": "The INCEPTION title is displayed in red letters"
+          },
+          {
+            "requirement": "The INCEPTION title should be positioned at the bottom",
+            "status": "CORRECT",
+            "explanation": "The INCEPTION title is positioned at the bottom of the poster"
+          },
+          {
+            "requirement": "The character to the central figure's left should be holding a weapon",
+            "status": "CORRECT",
+            "explanation": "Weapon is clearly visible being held by the character to the left of the central figure"
+          },
+          {
+            "requirement": "The overall lighting should be dim with bluish-gray tones",
+            "status": "CORRECT",
+            "explanation": "The image has dim lighting with prominent bluish-gray tones throughout"
+          },
+          {
+            "requirement": "The street pavement should be dark",
+            "status": "CORRECT",
+            "explanation": "The street pavement appears dark in color"
+          },
+          {
+            "requirement": "The street should have a dramatic sense of depth bending upward",
+            "status": "CORRECT",
+            "explanation": "The street shows dramatic perspective with the folded city effect bending upward"
+          },
+          {
+            "requirement": "Trees should be visible on the right side of the street",
+            "status": "CORRECT",
+            "explanation": "Trees or foliage are visible on the right side of the street"
+          },
+          {
+            "requirement": "Cars should NOT be submerged in water",
+            "status": "CORRECT",
+            "explanation": "No cars appear to be submerged in water"
+          },
+          {
+            "requirement": "Characters should be spread horizontally apart",
+            "status": "CORRECT",
+            "explanation": "The characters are spread horizontally across the street width"
+          },
+          {
+            "requirement": "The street should NOT be flooded",
+            "status": "CORRECT",
+            "explanation": "The street does not appear to be flooded"
+          }
+        ],
+        "scores": {
+          "correct": 17,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 15,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 2,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 12,
+        "text_correct_pct": 70.6,
+        "text_incorrect": 2,
+        "text_incorrect_pct": 11.8,
+        "text_missing": 3,
+        "text_missing_pct": 17.6,
+        "image_correct": 17,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 17,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 12,
+            "positive_incorrect": 0,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 2
+          },
+          "image": {
+            "positive_correct": 15,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 2,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 15,
+            "negative_rubric": 2
+          }
+        }
+      }
+    },
+    "9": {
+      "poster_name": "Star Wars: Episode IV - A New Hope (1977)",
+      "poster_id": "9",
+      "text_description": "The poster shows a large, dramatic composition centered around Luke Skywalker standing in the foreground. He is positioned slightly to the left of center, wearing a white tunic and tan pants, holding a raised lightsaber above his head with both hands. The lightsaber emits a bright, vertical blue beam of light extending upward toward the top of the image.\n\nBeside Luke, slightly lower and to his left, stands Princess Leia. She is wearing a flowing white dress with a high slit, one leg visible, and she is holding a small blaster in her right hand, pointed outward. Her stance is dynamic, leaning slightly forward.\n\nBehind and above them looms a large, semi-transparent depiction of Darth Vader’s helmeted face, dominating the upper part of the image. The blue lightsaber beam extends upward into the center of Vader’s mask, aligning roughly between his eyes.\n\nIn the background to the right and left, there are several spacecraft engaged in combat — X-wings and TIE fighters — with bright laser streaks crossing the space. Near the lower portion of the poster, slightly to the right, the two droids C-3PO and R2-D2 stand together, both facing outward.\n\nAt the bottom, the title **“STAR WARS”** appears in large, block capital letters, spanning the width of the image. Above or around it, smaller credit text lists names of cast and crew. The background shows outer space — dark, dotted with stars — and parts of a planet’s surface visible toward the lower edge, giving the impression of looking up from a planetary horizon.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/9.jpg",
+      "original_image": "misc/real_world_data/original_posters/9.jpg",
+      "positive_requirements": [
+        "A curved path/road should be present on left side of ground",
+        "A planet's surface should be visible toward the lower edge",
+        "C-3PO should be positioned in the lower right area",
+        "Darth Vader's helmet should loom large and semi-transparent above the scene",
+        "Luke Skywalker should be positioned slightly right of center",
+        "Luke Skywalker should hold a raised lightsaber above head with both hands",
+        "Luke Skywalker should wear white tunic and tan pants",
+        "Princess Leia should be positioned to Luke's right",
+        "Princess Leia should hold a small blaster in left hand",
+        "Princess Leia should wear a flowing white dress",
+        "R2-D2 should be positioned in the lower right area",
+        "The Death Star should be prominently visible in the upper left",
+        "The background should show outer space with stars",
+        "The ground should use a brown/tan color scheme",
+        "The lightsaber beam should be bright white",
+        "The space elements should use a blue/grey color scheme",
+        "The title 'STAR WARS' should be displayed in large block capitals at bottom",
+        "The poster should show X-wings in background"
+      ],
+      "negative_requirements": [
+        "The poster should NOT show TIE fighters in background"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "A curved path/road should be present on left side of ground",
+            "status": "MISSING",
+            "explanation": "Text does not mention any curved path or road on the left side of the ground"
+          },
+          {
+            "requirement": "A planet's surface should be visible toward the lower edge",
+            "status": "CORRECT",
+            "explanation": "Text states 'parts of a planet's surface visible toward the lower edge'"
+          },
+          {
+            "requirement": "C-3PO should be positioned in the lower right area",
+            "status": "CORRECT",
+            "explanation": "Text states C-3PO is 'slightly to the right' in the lower portion, but not specifically in the lower right area"
+          },
+          {
+            "requirement": "Darth Vader's helmet should loom large and semi-transparent above the scene",
+            "status": "CORRECT",
+            "explanation": "Text describes 'a large, semi-transparent depiction of Darth Vader's helmeted face, dominating the upper part of the image'"
+          },
+          {
+            "requirement": "Luke Skywalker should be positioned slightly right of center",
+            "status": "INCORRECT",
+            "explanation": "Text states Luke is 'positioned slightly to the left of center', not right of center"
+          },
+          {
+            "requirement": "Luke Skywalker should hold a raised lightsaber above head with both hands",
+            "status": "CORRECT",
+            "explanation": "Text states Luke is 'holding a raised lightsaber above his head with both hands'"
+          },
+          {
+            "requirement": "Luke Skywalker should wear white tunic and tan pants",
+            "status": "CORRECT",
+            "explanation": "Text states Luke is 'wearing a white tunic and tan pants'"
+          },
+          {
+            "requirement": "Princess Leia should be positioned to Luke's right",
+            "status": "INCORRECT",
+            "explanation": "Text states Leia is 'to his left'"
+          },
+          {
+            "requirement": "Princess Leia should hold a small blaster in left hand",
+            "status": "INCORRECT",
+            "explanation": "Text states Leia is 'holding a small blaster in her right hand'"
+          },
+          {
+            "requirement": "Princess Leia should wear a flowing white dress",
+            "status": "CORRECT",
+            "explanation": "Text states Leia is 'wearing a flowing white dress'"
+          },
+          {
+            "requirement": "R2-D2 should be positioned in the lower right area",
+            "status": "CORRECT",
+            "explanation": "Text states R2-D2 is 'slightly to the right' in the lower portion with C-3PO, but not specifically in the lower right area"
+          },
+          {
+            "requirement": "The Death Star should be prominently visible in the upper left",
+            "status": "MISSING",
+            "explanation": "Text does not mention the Death Star at all"
+          },
+          {
+            "requirement": "The background should show outer space with stars",
+            "status": "CORRECT",
+            "explanation": "Text states 'The background shows outer space — dark, dotted with stars'"
+          },
+          {
+            "requirement": "The ground should use a brown/tan color scheme",
+            "status": "MISSING",
+            "explanation": "Text does not mention the color scheme of the ground"
+          },
+          {
+            "requirement": "The lightsaber beam should be bright white",
+            "status": "INCORRECT",
+            "explanation": "Text describes the lightsaber beam as 'bright, vertical blue beam of light', not white"
+          },
+          {
+            "requirement": "The space elements should use a blue/grey color scheme",
+            "status": "MISSING",
+            "explanation": "Text does not mention the color scheme of the space elements"
+          },
+          {
+            "requirement": "The title 'STAR WARS' should be displayed in large block capitals at bottom",
+            "status": "CORRECT",
+            "explanation": "Text states 'the title **\"STAR WARS\"** appears in large, block capital letters' at the bottom"
+          },
+          {
+            "requirement": "The poster should show X-wings in background",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'X-wings and TIE fighters' in the background, which violates this negative requirement"
+          },
+          {
+            "requirement": "The poster should NOT show TIE fighters in background",
+            "status": "INCORRECT",
+            "explanation": "Text mentions 'X-wings and TIE fighters' in the background, which violates this negative requirement"
+          }
+        ],
+        "scores": {
+          "correct": 10,
+          "correct_pct": 52.6,
+          "incorrect": 5,
+          "incorrect_pct": 26.3,
+          "missing": 4,
+          "missing_pct": 21.1,
+          "positive_negative_breakdown": {
+            "positive_correct": 10,
+            "positive_incorrect": 4,
+            "positive_missing": 4,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "A curved path/road should be present on left side of ground",
+            "status": "CORRECT",
+            "explanation": "A curved path is visible on the left side of the ground area in the generated image"
+          },
+          {
+            "requirement": "A planet's surface should be visible toward the lower edge",
+            "status": "CORRECT",
+            "explanation": "The lower portion of the image shows what appears to be a planet's surface with brown/tan coloring"
+          },
+          {
+            "requirement": "C-3PO should be positioned in the lower right area",
+            "status": "CORRECT",
+            "explanation": "A golden droid figure consistent with C-3PO is visible in the lower right area"
+          },
+          {
+            "requirement": "Darth Vader's helmet should loom large and semi-transparent above the scene",
+            "status": "CORRECT",
+            "explanation": "A large, dark helmet shape looms above the scene with semi-transparent qualities allowing other elements to show through"
+          },
+          {
+            "requirement": "Luke Skywalker should be positioned slightly right of center",
+            "status": "CORRECT",
+            "explanation": "The main figure holding the lightsaber is positioned slightly to the right of the image center"
+          },
+          {
+            "requirement": "Luke Skywalker should hold a raised lightsaber above head with both hands",
+            "status": "CORRECT",
+            "explanation": "The central figure is holding what appears to be a lightsaber raised above their head with both hands"
+          },
+          {
+            "requirement": "Luke Skywalker should wear white tunic and tan pants",
+            "status": "CORRECT",
+            "explanation": "The figure appears to be wearing light-colored clothing consistent with a white tunic and tan pants"
+          },
+          {
+            "requirement": "Princess Leia should be positioned to Luke's right",
+            "status": "CORRECT",
+            "explanation": "A female figure in white is positioned to the right of the central lightsaber-wielding figure"
+          },
+          {
+            "requirement": "Princess Leia should hold a small blaster in left hand",
+            "status": "INCORRECT",
+            "explanation": "The female figure does not appear to be clearly holding a blaster in her left hand"
+          },
+          {
+            "requirement": "Princess Leia should wear a flowing white dress",
+            "status": "CORRECT",
+            "explanation": "The female figure appears to be wearing white flowing garments"
+          },
+          {
+            "requirement": "R2-D2 should be positioned in the lower right area",
+            "status": "CORRECT",
+            "explanation": "A small droid-like figure consistent with R2-D2's shape is visible in the lower right area"
+          },
+          {
+            "requirement": "The Death Star should be prominently visible in the upper left",
+            "status": "CORRECT",
+            "explanation": "A spherical space station with distinctive Death Star features is prominently displayed in the upper left"
+          },
+          {
+            "requirement": "The background should show outer space with stars",
+            "status": "CORRECT",
+            "explanation": "The background clearly shows a starfield representing outer space"
+          },
+          {
+            "requirement": "The ground should use a brown/tan color scheme",
+            "status": "CORRECT",
+            "explanation": "The ground area uses brown and tan colors as required"
+          },
+          {
+            "requirement": "The lightsaber beam should be bright white",
+            "status": "CORRECT",
+            "explanation": "The lightsaber beam appears as a bright white light"
+          },
+          {
+            "requirement": "The space elements should use a blue/grey color scheme",
+            "status": "CORRECT",
+            "explanation": "The space background and elements use blue and grey tones"
+          },
+          {
+            "requirement": "The title 'STAR WARS' should be displayed in large block capitals at bottom",
+            "status": "CORRECT",
+            "explanation": "STAR WARS is displayed in large block capital letters at the bottom of the poster"
+          },
+          {
+            "requirement": "The poster should show X-wings in background",
+            "status": "CORRECT",
+            "explanation": "X-wing fighters are visible in the background"
+          },
+          {
+            "requirement": "The poster should NOT show TIE fighters in background",
+            "status": "CORRECT",
+            "explanation": "No TIE fighters are visible in the background"
+          }
+        ],
+        "scores": {
+          "correct": 18,
+          "correct_pct": 94.7,
+          "incorrect": 1,
+          "incorrect_pct": 5.3,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 17,
+            "positive_incorrect": 1,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 10,
+        "text_correct_pct": 52.6,
+        "text_incorrect": 5,
+        "text_incorrect_pct": 26.3,
+        "text_missing": 4,
+        "text_missing_pct": 21.1,
+        "image_correct": 18,
+        "image_correct_pct": 94.7,
+        "image_incorrect": 1,
+        "image_incorrect_pct": 5.3,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 19,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 10,
+            "positive_incorrect": 4,
+            "positive_missing": 4,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          },
+          "image": {
+            "positive_correct": 17,
+            "positive_incorrect": 1,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 18,
+            "negative_rubric": 1
+          }
+        }
+      }
+    },
+    "10": {
+      "poster_name": "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "poster_id": "10",
+      "text_description": "The original theatrical release poster of **Star Wars: Episode V – The Empire Strikes Back (1980)** designed by **Roger Kastel** depicts a dramatic composition centered around the main characters and key visual motifs from the film.\n\nAt the center of the poster, **Han Solo and Princess Leia** dominate the image. Han is shown holding Leia in his arms in a romantic, almost embrace-like pose — her head tilted back, their faces close together, evoking the sense of intimacy between them. Han is dressed in his familiar outfit with dark jacket and trousers, while Leia wears her white outfit with cape-like folds.\n\nBehind and above them, **Darth Vader’s helmeted face** looms large, occupying a significant portion of the upper poster. His mask and triangular mouthpiece are rendered prominently, and his presence forms a dark backdrop for the rest of the composition.\n\nBelow the central figures, **Luke Skywalker** appears on the left side, mounted on a **tauntaun**, wearing his snow gear with goggles and helmet — a reference to the icy planet Hoth. Near him, there are additional smaller figures of **Rebel soldiers** and **Imperial walkers (AT-ATs)** advancing in the snowy battlefield, with laser fire visible in the scene.\n\nIn the lower region of the poster, the **Millennium Falcon** is depicted in flight, pursued by **TIE fighters**, with streaks suggesting motion and combat.\n\nAt the top, the title text reads **“The Empire Strikes Back”** in large bold letters, contained within a rectangular frame that angles upward on the right side, matching the film’s logo design. The words **“Star Wars”** appear smaller above it.\n\nAt the bottom, the **credit block** lists production information — including **Lucasfilm**, **20th Century Fox**, and the main cast names such as **Mark Hamill, Harrison Ford, Carrie Fisher, Billy Dee Williams, Anthony Daniels, David Prowse, Kenny Baker, Peter Mayhew, and Frank Oz** — followed by the **director and producer credits**.\n\nThe overall layout balances the towering image of Vader above, the romantic pair at center, and the action scenes and spacecraft below, integrating character portraits and action vignettes into a single layered composition.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/10.jpg",
+      "original_image": "misc/real_world_data/original_posters/10.jpg",
+      "positive_requirements": [
+        "C-3PO should be visible on the lower left side",
+        "Dark space background should have blue/purple tones",
+        "Darth Vader's helmeted face should loom large above the composition",
+        "Han Solo and Princess Leia should be positioned at center in romantic embrace",
+        "Han Solo should wear dark jacket and trousers",
+        "Luke Skywalker should be positioned on the left side mounted on a tauntaun",
+        "Luke Skywalker should wear snow gear with goggles and helmet",
+        "Misty/cloudy effects should be present at bottom of poster",
+        "Princess Leia should wear dark outfit",
+        "R2-D2 should be visible on the lower left side near C-3PO",
+        "The title 'THE EMPIRE STRIKES BACK' should be in rectangular frame",
+        "The title frame should angle upward on right",
+        "X-wing fighters should be positioned in upper right area"
+      ],
+      "negative_requirements": [
+        "The Millennium Falcon should NOT be visible in the lower portion"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "C-3PO should be visible on the lower left side",
+            "status": "MISSING",
+            "explanation": "The text description does not mention C-3PO at all"
+          },
+          {
+            "requirement": "Dark space background should have blue/purple tones",
+            "status": "MISSING",
+            "explanation": "The text description does not mention the color tones of the background"
+          },
+          {
+            "requirement": "Darth Vader's helmeted face should loom large above the composition",
+            "status": "CORRECT",
+            "explanation": "Text states 'Behind and above them, Darth Vader's helmeted face looms large, occupying a significant portion of the upper poster'"
+          },
+          {
+            "requirement": "Han Solo and Princess Leia should be positioned at center in romantic embrace",
+            "status": "CORRECT",
+            "explanation": "Text states 'At the center of the poster, Han Solo and Princess Leia dominate the image. Han is shown holding Leia in his arms in a romantic, almost embrace-like pose'"
+          },
+          {
+            "requirement": "Han Solo should wear dark jacket and trousers",
+            "status": "CORRECT",
+            "explanation": "Text states 'Han is dressed in his familiar outfit with dark jacket and trousers'"
+          },
+          {
+            "requirement": "Luke Skywalker should be positioned on the left side mounted on a tauntaun",
+            "status": "CORRECT",
+            "explanation": "Text states 'Below the central figures, Luke Skywalker appears on the left side, mounted on a tauntaun'"
+          },
+          {
+            "requirement": "Luke Skywalker should wear snow gear with goggles and helmet",
+            "status": "CORRECT",
+            "explanation": "Text states Luke is 'wearing his snow gear with goggles and helmet'"
+          },
+          {
+            "requirement": "Misty/cloudy effects should be present at bottom of poster",
+            "status": "MISSING",
+            "explanation": "The text description does not mention any misty or cloudy effects at the bottom of the poster"
+          },
+          {
+            "requirement": "Princess Leia should wear dark outfit",
+            "status": "INCORRECT",
+            "explanation": "Text states 'Leia wears her white outfit with cape-like folds'"
+          },
+          {
+            "requirement": "R2-D2 should be visible on the lower left side near C-3PO",
+            "status": "MISSING",
+            "explanation": "The text description does not mention R2-D2 at all"
+          },
+          {
+            "requirement": "The Millennium Falcon should NOT be visible in the lower portion",
+            "status": "INCORRECT",
+            "explanation": "Text states 'In the lower region of the poster, the Millennium Falcon is depicted in flight'"
+          },
+          {
+            "requirement": "The title 'THE EMPIRE STRIKES BACK' should be in rectangular frame",
+            "status": "CORRECT",
+            "explanation": "Text states 'the title text reads The Empire Strikes Back in large bold letters, contained within a rectangular frame'"
+          },
+          {
+            "requirement": "The title frame should angle upward on right",
+            "status": "CORRECT",
+            "explanation": "Text states the rectangular frame 'angles upward on the right side'"
+          },
+          {
+            "requirement": "X-wing fighters should be positioned in upper right area",
+            "status": "MISSING",
+            "explanation": "The text description does not mention X-wing fighters at all"
+          }
+        ],
+        "scores": {
+          "correct": 7,
+          "correct_pct": 50.0,
+          "incorrect": 2,
+          "incorrect_pct": 14.3,
+          "missing": 5,
+          "missing_pct": 35.7,
+          "positive_negative_breakdown": {
+            "positive_correct": 7,
+            "positive_incorrect": 1,
+            "positive_missing": 5,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "C-3PO should be visible on the lower left side",
+            "status": "CORRECT",
+            "explanation": "A golden droid figure (C-3PO) is visible in the lower left portion of the generated image"
+          },
+          {
+            "requirement": "Dark space background should have blue/purple tones",
+            "status": "CORRECT",
+            "explanation": "The background clearly shows dark space with prominent blue and purple tones throughout"
+          },
+          {
+            "requirement": "Darth Vader's helmeted face should loom large above the composition",
+            "status": "CORRECT",
+            "explanation": "Darth Vader's distinctive helmeted face is prominently displayed in the upper portion of the poster, looming over the other elements"
+          },
+          {
+            "requirement": "Han Solo and Princess Leia should be positioned at center in romantic embrace",
+            "status": "CORRECT",
+            "explanation": "Two figures are shown in the center of the composition in what appears to be a romantic embrace"
+          },
+          {
+            "requirement": "Han Solo should wear dark jacket and trousers",
+            "status": "CORRECT",
+            "explanation": "The male figure in the central embrace appears to be wearing dark clothing"
+          },
+          {
+            "requirement": "Luke Skywalker should be positioned on the left side mounted on a tauntaun",
+            "status": "CORRECT",
+            "explanation": "A figure mounted on what appears to be a creature (tauntaun) is visible on the left side of the composition"
+          },
+          {
+            "requirement": "Luke Skywalker should wear snow gear with goggles and helmet",
+            "status": "CORRECT",
+            "explanation": "The mounted figure on the left appears to be wearing light-colored gear consistent with snow gear"
+          },
+          {
+            "requirement": "Misty/cloudy effects should be present at bottom of poster",
+            "status": "CORRECT",
+            "explanation": "There are clear misty/cloudy white effects visible at the bottom portion of the poster"
+          },
+          {
+            "requirement": "Princess Leia should wear dark outfit",
+            "status": "CORRECT",
+            "explanation": "The female figure in the central embrace appears to be wearing dark clothing"
+          },
+          {
+            "requirement": "R2-D2 should be visible on the lower left side near C-3PO",
+            "status": "CORRECT",
+            "explanation": "A smaller droid figure (R2-D2) appears to be visible near C-3PO in the lower left area"
+          },
+          {
+            "requirement": "The Millennium Falcon should NOT be visible in the lower portion",
+            "status": "CORRECT",
+            "explanation": "The Millennium Falcon is not clearly visible in the lower portion of the generated image"
+          },
+          {
+            "requirement": "The title 'THE EMPIRE STRIKES BACK' should be in rectangular frame",
+            "status": "CORRECT",
+            "explanation": "The title 'THE EMPIRE STRIKES BACK' is displayed within a rectangular frame"
+          },
+          {
+            "requirement": "The title frame should angle upward on right",
+            "status": "CORRECT",
+            "explanation": "The title frame appears to have an angled perspective, tilting upward on the right side"
+          },
+          {
+            "requirement": "X-wing fighters should be positioned in upper right area",
+            "status": "CORRECT",
+            "explanation": "Small spacecraft that appear to be X-wings are visible in the upper right area"
+          }
+        ],
+        "scores": {
+          "correct": 14,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 13,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 7,
+        "text_correct_pct": 50.0,
+        "text_incorrect": 2,
+        "text_incorrect_pct": 14.3,
+        "text_missing": 5,
+        "text_missing_pct": 35.7,
+        "image_correct": 14,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 14,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 7,
+            "positive_incorrect": 1,
+            "positive_missing": 5,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          },
+          "image": {
+            "positive_correct": 13,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 13,
+            "negative_rubric": 1
+          }
+        }
+      }
+    },
+    "14": {
+      "poster_name": "Harry Potter and the Chamber of Secrets (2002)",
+      "poster_id": "14",
+      "text_description": "The poster shows several main characters arranged in a dense, fantasy-like composition centered around Harry Potter.\n\nHarry is in the foreground, facing forward, slightly turned to his left. He is wearing round glasses and his Hogwarts school robe, which has a Gryffindor crest on the chest. He is holding a silver sword — the Sword of Godric Gryffindor — angled diagonally across his body, with its blade reflecting light. His expression is serious and focused.\n\nTo Harry’s left (on the viewer’s right side of the poster) is Hermione Granger, slightly behind him, visible from the waist up. She is also wearing Hogwarts robes and looking alert, with her hair loose and wavy. To Harry’s right (on the viewer’s left) stands Ron Weasley, also in school robes, his mouth slightly open and eyes wide as if startled.\n\nBehind the three, farther back and above them, is Dobby the house-elf, looking downward with large eyes and long ears. In the background, there is also a faint figure of Professor Dumbledore, his long silver hair and beard visible, watching over them. The environment around the characters is a dimly lit stone chamber with greenish tones, suggestive of the Chamber of Secrets itself. On one side of the background there is the carved serpent head associated with Salazar Slytherin, its mouth open, and parts of snake-like patterns or stone columns visible.\n\nAt the bottom portion of the poster, the movie’s title *Harry Potter and the Chamber of Secrets* is written in its distinctive stylized golden font. Beneath it are the credits, including cast and production details, in small text. The release information (“November 15”) appears toward the bottom. The overall layout places Harry and the sword as the visual center, surrounded by his friends, mystical figures, and the chamber’s dark architecture.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/14.jpg",
+      "original_image": "misc/real_world_data/original_posters/14.jpg",
+      "positive_requirements": [
+        "Dobby should be visible in bottom left corner with large eyes",
+        "Harry Potter should be positioned in the foreground on viewer's right",
+        "Harry Potter should have a serious/focused expression",
+        "Harry Potter should hold the Sword of Gryffindor diagonally across his body",
+        "Harry Potter should wear Hogwarts robes with Gryffindor crest",
+        "Harry Potter should wear round glasses",
+        "Hermione Granger should be positioned on viewer's left",
+        "Hermione Granger should be slightly behind Harry",
+        "Hermione Granger should be visible from waist up",
+        "Hermione Granger should have loose wavy hair and alert expression",
+        "Hermione Granger should wear Hogwarts robes",
+        "Movie title should be in golden font at bottom",
+        "Ron Weasley should be positioned in the center-back",
+        "Ron Weasley should have mouth slightly open and eyes wide",
+        "Ron Weasley should wear Hogwarts robes",
+        "Stone columns should be visible in background",
+        "The chamber should be dimly lit with greenish tones"
+      ],
+      "negative_requirements": [
+        "The poster should NOT include Dumbledore",
+        "The poster should NOT include a carved serpent head with mouth open"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "Dobby should be visible in bottom left corner with large eyes",
+            "status": "INCORRECT",
+            "explanation": "Text states Dobby is 'behind the three, farther back and above them' not in the bottom left corner"
+          },
+          {
+            "requirement": "Harry Potter should be positioned in the foreground on viewer's right",
+            "status": "INCORRECT",
+            "explanation": "Text states Harry is 'in the foreground' but 'centered' not specifically on viewer's right"
+          },
+          {
+            "requirement": "Harry Potter should have a serious/focused expression",
+            "status": "CORRECT",
+            "explanation": "Text explicitly states 'His expression is serious and focused'"
+          },
+          {
+            "requirement": "Harry Potter should hold the Sword of Gryffindor diagonally across his body",
+            "status": "CORRECT",
+            "explanation": "Text states 'He is holding a silver sword — the Sword of Godric Gryffindor — angled diagonally across his body'"
+          },
+          {
+            "requirement": "Harry Potter should wear Hogwarts robes with Gryffindor crest",
+            "status": "CORRECT",
+            "explanation": "Text states 'He is wearing... his Hogwarts school robe, which has a Gryffindor crest on the chest'"
+          },
+          {
+            "requirement": "Harry Potter should wear round glasses",
+            "status": "CORRECT",
+            "explanation": "Text states 'He is wearing round glasses'"
+          },
+          {
+            "requirement": "Hermione Granger should be positioned on viewer's left",
+            "status": "INCORRECT",
+            "explanation": "Text states Hermione is 'To Harry's left (on the viewer's right side of the poster)' not on viewer's left"
+          },
+          {
+            "requirement": "Hermione Granger should be slightly behind Harry",
+            "status": "CORRECT",
+            "explanation": "Text states she is 'slightly behind him'"
+          },
+          {
+            "requirement": "Hermione Granger should be visible from waist up",
+            "status": "CORRECT",
+            "explanation": "Text states she is 'visible from the waist up'"
+          },
+          {
+            "requirement": "Hermione Granger should have loose wavy hair and alert expression",
+            "status": "CORRECT",
+            "explanation": "Text states she is 'looking alert, with her hair loose and wavy'"
+          },
+          {
+            "requirement": "Hermione Granger should wear Hogwarts robes",
+            "status": "CORRECT",
+            "explanation": "Text states 'She is also wearing Hogwarts robes'"
+          },
+          {
+            "requirement": "Movie title should be in golden font at bottom",
+            "status": "CORRECT",
+            "explanation": "Text states 'At the bottom portion of the poster, the movie's title... is written in its distinctive stylized golden font'"
+          },
+          {
+            "requirement": "Ron Weasley should be positioned in the center-back",
+            "status": "INCORRECT",
+            "explanation": "Text states Ron is 'To Harry's right (on the viewer's left)' not in center-back position"
+          },
+          {
+            "requirement": "Ron Weasley should have mouth slightly open and eyes wide",
+            "status": "CORRECT",
+            "explanation": "Text states 'his mouth slightly open and eyes wide as if startled'"
+          },
+          {
+            "requirement": "Ron Weasley should wear Hogwarts robes",
+            "status": "CORRECT",
+            "explanation": "Text states Ron is 'also in school robes'"
+          },
+          {
+            "requirement": "Stone columns should be visible in background",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'parts of snake-like patterns or stone columns visible'"
+          },
+          {
+            "requirement": "The chamber should be dimly lit with greenish tones",
+            "status": "CORRECT",
+            "explanation": "Text states 'The environment... is a dimly lit stone chamber with greenish tones'"
+          },
+          {
+            "requirement": "The poster should NOT include Dumbledore",
+            "status": "INCORRECT",
+            "explanation": "Text mentions 'there is also a faint figure of Professor Dumbledore' which violates this requirement"
+          },
+          {
+            "requirement": "The poster should NOT include a carved serpent head with mouth open",
+            "status": "INCORRECT",
+            "explanation": "Text mentions 'the carved serpent head associated with Salazar Slytherin, its mouth open' which violates this requirement"
+          }
+        ],
+        "scores": {
+          "correct": 13,
+          "correct_pct": 68.4,
+          "incorrect": 6,
+          "incorrect_pct": 31.6,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 13,
+            "positive_incorrect": 4,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 2
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "Dobby should be visible in bottom left corner with large eyes",
+            "status": "CORRECT",
+            "explanation": "Dobby is visible in the bottom left corner of the generated image with characteristic large eyes"
+          },
+          {
+            "requirement": "Harry Potter should be positioned in the foreground on viewer's right",
+            "status": "CORRECT",
+            "explanation": "Harry Potter is positioned in the foreground on the viewer's right side of the image"
+          },
+          {
+            "requirement": "Harry Potter should have a serious/focused expression",
+            "status": "CORRECT",
+            "explanation": "Harry Potter displays a serious and focused expression in the generated image"
+          },
+          {
+            "requirement": "Harry Potter should hold the Sword of Gryffindor diagonally across his body",
+            "status": "CORRECT",
+            "explanation": "Harry is holding what appears to be the Sword of Gryffindor diagonally across his body"
+          },
+          {
+            "requirement": "Harry Potter should wear Hogwarts robes with Gryffindor crest",
+            "status": "CORRECT",
+            "explanation": "Harry is wearing dark Hogwarts robes with what appears to be the Gryffindor crest visible"
+          },
+          {
+            "requirement": "Harry Potter should wear round glasses",
+            "status": "CORRECT",
+            "explanation": "Harry is wearing his characteristic round glasses"
+          },
+          {
+            "requirement": "Hermione Granger should be positioned on viewer's left",
+            "status": "CORRECT",
+            "explanation": "Hermione appears to be positioned on the viewer's left side of the image"
+          },
+          {
+            "requirement": "Hermione Granger should be slightly behind Harry",
+            "status": "CORRECT",
+            "explanation": "Hermione is positioned slightly behind Harry in the composition"
+          },
+          {
+            "requirement": "Hermione Granger should be visible from waist up",
+            "status": "CORRECT",
+            "explanation": "Hermione is visible from approximately waist up in the image"
+          },
+          {
+            "requirement": "Hermione Granger should have loose wavy hair and alert expression",
+            "status": "CORRECT",
+            "explanation": "Hermione has wavy hair and an alert expression"
+          },
+          {
+            "requirement": "Hermione Granger should wear Hogwarts robes",
+            "status": "CORRECT",
+            "explanation": "Hermione is wearing dark Hogwarts robes"
+          },
+          {
+            "requirement": "Movie title should be in golden font at bottom",
+            "status": "CORRECT",
+            "explanation": "The movie title 'Harry Potter' is displayed in golden font at the bottom of the poster"
+          },
+          {
+            "requirement": "Ron Weasley should be positioned in the center-back",
+            "status": "CORRECT",
+            "explanation": "Ron appears to be positioned in the center-back area between Harry and Hermione"
+          },
+          {
+            "requirement": "Ron Weasley should have mouth slightly open and eyes wide",
+            "status": "CORRECT",
+            "explanation": "Ron appears to have a surprised expression with mouth slightly open and eyes wide"
+          },
+          {
+            "requirement": "Ron Weasley should wear Hogwarts robes",
+            "status": "CORRECT",
+            "explanation": "Ron is wearing dark Hogwarts robes"
+          },
+          {
+            "requirement": "Stone columns should be visible in background",
+            "status": "CORRECT",
+            "explanation": "The background shows architectural elements that appear to be stone columns or arches"
+          },
+          {
+            "requirement": "The chamber should be dimly lit with greenish tones",
+            "status": "CORRECT",
+            "explanation": "The overall lighting of the chamber has greenish tones and appears dimly lit"
+          },
+          {
+            "requirement": "The poster should NOT include Dumbledore",
+            "status": "CORRECT",
+            "explanation": "Dumbledore is not visible in the generated poster"
+          },
+          {
+            "requirement": "The poster should NOT include a carved serpent head with mouth open",
+            "status": "CORRECT",
+            "explanation": "No carved serpent head with mouth open is visible in the generated poster"
+          }
+        ],
+        "scores": {
+          "correct": 19,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 17,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 2,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 13,
+        "text_correct_pct": 68.4,
+        "text_incorrect": 6,
+        "text_incorrect_pct": 31.6,
+        "text_missing": 0,
+        "text_missing_pct": 0.0,
+        "image_correct": 19,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 19,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 13,
+            "positive_incorrect": 4,
+            "positive_missing": 0,
+            "negative_correct": 0,
+            "negative_incorrect": 2
+          },
+          "image": {
+            "positive_correct": 17,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 2,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 17,
+            "negative_rubric": 2
+          }
+        }
+      }
+    },
+    "15": {
+      "poster_name": "Back to the Future (1985)",
+      "poster_id": "15",
+      "text_description": "The poster shows Marty McFly standing in front of the DeLorean time machine. He is positioned slightly to the left of center, facing toward the viewer but glancing over his right shoulder toward the car. Marty is lifting up the front edge of his sunglasses with his left hand and looking at his wristwatch on his right arm. He is wearing a red puffer vest over a blue denim jacket, a checkered shirt underneath, jeans, and white sneakers. His right foot is partly inside the open gull-wing door of the DeLorean, which is raised above him.\n\nThe DeLorean’s headlights are on, casting a bright beam of light that illuminates the lower area of the poster. The car’s rear tires appear to be just off the ground, leaving behind two parallel trails of fire that extend diagonally toward the bottom edge of the image, suggesting motion or recent acceleration. The background transitions from dark blue at the top to a bright orange-yellow glow around the car.\n\nAbove Marty and the car, the movie title “BACK TO THE FUTURE” appears in large, slanted lettering, with the words arranged in two lines — “BACK TO THE” above “FUTURE.” The letters are colored in a gradient of yellow to red, with a stylized arrow extending backward from the word “BACK.” Near the top, above the title, the text reads “STEVEN SPIELBERG presents” and “A ROBERT ZEMECKIS Film.” At the bottom, there is standard billing information in small white text, including the names of the main cast, director, producers, and technical credits, along with the Universal Pictures logo.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/15.jpg",
+      "original_image": "misc/real_world_data/original_posters/15.jpg",
+      "positive_requirements": [
+        "Background should transition from dark blue to orange-yellow glow",
+        "DeLorean should be positioned on viewer's left side",
+        "DeLorean's headlights should be on with bright beam",
+        "Marty McFly should be facing viewer",
+        "Marty McFly should be lifting sunglasses with right hand",
+        "Marty McFly should be looking at wristwatch on left arm",
+        "Marty McFly should be positioned to the right of center from viewer's perspective",
+        "Marty McFly should be wearing a blue denim jacket",
+        "Marty McFly should be wearing a checkered shirt underneath",
+        "Marty McFly should be wearing a orange puffer vest",
+        "Marty McFly should be wearing jeans",
+        "Marty McFly should be wearing white sneakers",
+        "Marty McFly's right foot should be positioned near/under the raised gull-wing door",
+        "Movie title 'BACK TO THE FUTURE' should be in large slanted lettering",
+        "Movie title letters should have yellow to red gradient coloring",
+        "Movie title should be displayed in two lines",
+        "Stylized arrow should extend backward from 'BACK'",
+        "Two parallel fire trails should extend diagonally from the DeLorean"
+      ],
+      "negative_requirements": [
+        "Marty McFly should NOT glance over his right sholder"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "Background should transition from dark blue to orange-yellow glow",
+            "status": "CORRECT",
+            "explanation": "Text states 'The background transitions from dark blue at the top to a bright orange-yellow glow around the car'"
+          },
+          {
+            "requirement": "DeLorean should be positioned on viewer's left side",
+            "status": "MISSING",
+            "explanation": "Text does not specify the DeLorean's position relative to the viewer's left or right side"
+          },
+          {
+            "requirement": "DeLorean's headlights should be on with bright beam",
+            "status": "CORRECT",
+            "explanation": "Text states 'The DeLorean's headlights are on, casting a bright beam of light'"
+          },
+          {
+            "requirement": "Marty McFly should be facing viewer",
+            "status": "CORRECT",
+            "explanation": "Text states 'facing toward the viewer but glancing over his right shoulder toward the car'"
+          },
+          {
+            "requirement": "Marty McFly should NOT glance over his right sholder",
+            "status": "INCORRECT",
+            "explanation": "Text states 'facing toward the viewer but glancing over his right shoulder toward the car'"
+          },
+          {
+            "requirement": "Marty McFly should be lifting sunglasses with right hand",
+            "status": "INCORRECT",
+            "explanation": "Text states 'Marty is lifting up the front edge of his sunglasses with his left hand'"
+          },
+          {
+            "requirement": "Marty McFly should be looking at wristwatch on left arm",
+            "status": "INCORRECT",
+            "explanation": "Text states 'looking at his wristwatch on his right arm'"
+          },
+          {
+            "requirement": "Marty McFly should be positioned to the right of center from viewer's perspective",
+            "status": "INCORRECT",
+            "explanation": "Text states 'He is positioned slightly to the left of center', which contradicts this requirement"
+          },
+          {
+            "requirement": "Marty McFly should be wearing a blue denim jacket",
+            "status": "CORRECT",
+            "explanation": "Text states 'a red puffer vest over a blue denim jacket'"
+          },
+          {
+            "requirement": "Marty McFly should be wearing a checkered shirt underneath",
+            "status": "CORRECT",
+            "explanation": "Text states 'a checkered shirt underneath'"
+          },
+          {
+            "requirement": "Marty McFly should be wearing a orange puffer vest",
+            "status": "INCORRECT",
+            "explanation": "Text states 'He is wearing a red puffer vest'"
+          },
+          {
+            "requirement": "Marty McFly should be wearing jeans",
+            "status": "CORRECT",
+            "explanation": "Text states 'jeans' in the clothing description"
+          },
+          {
+            "requirement": "Marty McFly should be wearing white sneakers",
+            "status": "CORRECT",
+            "explanation": "Text states 'and white sneakers'"
+          },
+          {
+            "requirement": "Marty McFly's right foot should be positioned near/under the raised gull-wing door",
+            "status": "CORRECT",
+            "explanation": "Text states 'His right foot is partly inside the open gull-wing door of the DeLorean, which is raised above him'"
+          },
+          {
+            "requirement": "Movie title 'BACK TO THE FUTURE' should be in large slanted lettering",
+            "status": "CORRECT",
+            "explanation": "Text states 'the movie title \"BACK TO THE FUTURE\" appears in large, slanted lettering'"
+          },
+          {
+            "requirement": "Movie title letters should have yellow to red gradient coloring",
+            "status": "CORRECT",
+            "explanation": "Text states 'The letters are colored in a gradient of yellow to red'"
+          },
+          {
+            "requirement": "Movie title should be displayed in two lines",
+            "status": "CORRECT",
+            "explanation": "Text states 'with the words arranged in two lines — \"BACK TO THE\" above \"FUTURE\"'"
+          },
+          {
+            "requirement": "Stylized arrow should extend backward from 'BACK'",
+            "status": "CORRECT",
+            "explanation": "Text states 'with a stylized arrow extending backward from the word \"BACK\"'"
+          },
+          {
+            "requirement": "Two parallel fire trails should extend diagonally from the DeLorean",
+            "status": "CORRECT",
+            "explanation": "Text states 'leaving behind two parallel trails of fire that extend diagonally toward the bottom edge of the image'"
+          }
+        ],
+        "scores": {
+          "correct": 13,
+          "correct_pct": 68.4,
+          "incorrect": 5,
+          "incorrect_pct": 26.3,
+          "missing": 1,
+          "missing_pct": 5.3,
+          "positive_negative_breakdown": {
+            "positive_correct": 13,
+            "positive_incorrect": 4,
+            "positive_missing": 1,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "Background should transition from dark blue to orange-yellow glow",
+            "status": "CORRECT",
+            "explanation": "The background clearly transitions from dark blue at the top to an orange-yellow glow at the bottom"
+          },
+          {
+            "requirement": "DeLorean should be positioned on viewer's left side",
+            "status": "CORRECT",
+            "explanation": "The DeLorean is positioned on the left side of the image from the viewer's perspective"
+          },
+          {
+            "requirement": "DeLorean's headlights should be on with bright beam",
+            "status": "CORRECT",
+            "explanation": "The DeLorean's headlights appear to be illuminated with visible light beams"
+          },
+          {
+            "requirement": "Marty McFly should be facing viewer",
+            "status": "CORRECT",
+            "explanation": "Marty appears to be facing forward toward the viewer"
+          },
+          {
+            "requirement": "Marty McFly should NOT glance over his right sholder",
+            "status": "CORRECT",
+            "explanation": "Marty appears to be facing forward toward the viewer"
+          },
+          {
+            "requirement": "Marty McFly should be lifting sunglasses with right hand",
+            "status": "CORRECT",
+            "explanation": "Marty appears to have his right hand raised near his face in a gesture consistent with lifting sunglasses"
+          },
+          {
+            "requirement": "Marty McFly should be looking at wristwatch on left arm",
+            "status": "CORRECT",
+            "explanation": "Marty's left arm appears to be positioned as if checking a watch"
+          },
+          {
+            "requirement": "Marty McFly should be positioned to the right of center from viewer's perspective",
+            "status": "CORRECT",
+            "explanation": "Marty is clearly positioned to the right of center in the image"
+          },
+          {
+            "requirement": "Marty McFly should be wearing a blue denim jacket",
+            "status": "CORRECT",
+            "explanation": "Marty appears to be wearing a blue denim jacket"
+          },
+          {
+            "requirement": "Marty McFly should be wearing a checkered shirt underneath",
+            "status": "CORRECT",
+            "explanation": "A checkered pattern is visible underneath the jacket"
+          },
+          {
+            "requirement": "Marty McFly should be wearing a orange puffer vest",
+            "status": "CORRECT",
+            "explanation": "A orange vest is visible over the shirt"
+          },
+          {
+            "requirement": "Marty McFly should be wearing jeans",
+            "status": "CORRECT",
+            "explanation": "Marty appears to be wearing blue jeans"
+          },
+          {
+            "requirement": "Marty McFly should be wearing white sneakers",
+            "status": "CORRECT",
+            "explanation": "White sneakers are visible on Marty's feet"
+          },
+          {
+            "requirement": "Marty McFly's right foot should be positioned near/under the raised gull-wing door",
+            "status": "CORRECT",
+            "explanation": "Marty's right foot appears to be positioned near the raised gull-wing door of the DeLorean"
+          },
+          {
+            "requirement": "Movie title 'BACK TO THE FUTURE' should be in large slanted lettering",
+            "status": "CORRECT",
+            "explanation": "The title 'BACK TO THE FUTURE' is displayed in large, slanted lettering"
+          },
+          {
+            "requirement": "Movie title letters should have yellow to red gradient coloring",
+            "status": "CORRECT",
+            "explanation": "The title letters show a gradient from yellow to red/orange coloring"
+          },
+          {
+            "requirement": "Movie title should be displayed in two lines",
+            "status": "CORRECT",
+            "explanation": "The title is displayed in two lines with 'BACK' on top and 'TO THE FUTURE' below"
+          },
+          {
+            "requirement": "Stylized arrow should extend backward from 'BACK'",
+            "status": "CORRECT",
+            "explanation": "There is a stylized arrow element extending from the word 'BACK'"
+          },
+          {
+            "requirement": "Two parallel fire trails should extend diagonally from the DeLorean",
+            "status": "CORRECT",
+            "explanation": "Two parallel fire trails are visible extending diagonally from the DeLorean"
+          }
+        ],
+        "scores": {
+          "correct": 19,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 18,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 13,
+        "text_correct_pct": 68.4,
+        "text_incorrect": 5,
+        "text_incorrect_pct": 26.3,
+        "text_missing": 1,
+        "text_missing_pct": 5.3,
+        "image_correct": 19,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 19,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 13,
+            "positive_incorrect": 4,
+            "positive_missing": 1,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          },
+          "image": {
+            "positive_correct": 18,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 18,
+            "negative_rubric": 1
+          }
+        }
+      }
+    },
+    "17": {
+      "poster_name": "The Lord of the Rings: The Return of the King (2003)",
+      "poster_id": "17",
+      "text_description": "The poster shows several of the main characters arranged in a layered composition suggesting an impending battle or climax.\n\nIn the foreground, **Aragorn** is dominant at the center. He is seen from the waist up, slightly turned to his right but looking forward with an intense expression. He holds a **sword (Andúril)** in front of him, its blade vertical and gleaming, gripped in both hands. His hair is long and loose, and he wears dark battle armor with a silver emblem visible on his chest.\n\nBehind and slightly above him to the left stands **Frodo Baggins**, his face lit, eyes wide and anxious. He is holding the **One Ring** dangling from a chain in his right hand, lifted slightly as if contemplating it. Just below and behind him on the left is **Samwise Gamgee**, looking determined, gazing toward the same direction as Frodo, his face dirty and tense.\n\nTo Aragorn’s right side, slightly higher, is **Gandalf the White**, shown from the waist up, holding his **staff** in his right hand and his **sword Glamdring** in the left. His long white hair and beard are distinct, and his expression is serious, directed forward.\n\nIn the upper right area of the poster, there is a large image of **Gollum**, his head and shoulders visible, looking downward with a sly, tense expression. Below him, to the lower right, **Éowyn** appears in armor with her long blond hair visible, holding a **sword** in a defensive or ready posture. Next to her, slightly behind, **Legolas** and **Gimli** appear—Legolas aiming his **bow** and Gimli holding his **axe**.\n\nIn the background, at the lower part of the image, there is a **battle scene** with many mounted soldiers, flags, and spears—suggesting the **armies of men** preparing for war. In the far distance, faintly visible, is a dark **fortress-like structure**, possibly **Mordor or Minas Tirith**, with fiery or smoke-like light behind it.\n\nAt the bottom center of the poster, the title **“The Lord of the Rings: The Return of the King”** is printed in large gold letters. Beneath it, in smaller type, are the release details and production credits.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/17.jpg",
+      "original_image": "misc/real_world_data/original_posters/17.jpg",
+      "positive_requirements": [
+        "A fortress/tower structure should be visible in the background",
+        "A golden/fiery orb light source should be present in the middle-right area",
+        "Aragorn should be positioned in the center foreground",
+        "Aragorn should be holding a sword vertically with both hands",
+        "Aragorn should be wearing dark armor",
+        "Aragorn should have long hair",
+        "Arwen should be positioned in the lower left of the poster",
+        "Frodo should be holding a phial",
+        "Frodo should be positioned to the viewer's right of Aragorn",
+        "Gandalf should be holding a staff",
+        "Gandalf should be positioned in the upper right area",
+        "Gollum should be positioned in the lower left area",
+        "Sam should be positioned to the left of Frodo",
+        "The overall color tone should be sepia/golden",
+        "The title 'The Lord of the Rings: The Return of the King' should be in gold letters",
+        "The title should be positioned at the bottom"
+      ],
+      "negative_requirements": [
+        "A battle scene with soldiers should NOT be visible in the lower portion",
+        "Gimli should NOT be positioned next to Arwen",
+        "Legolas should NOT be positioned next to Arwen",
+        "Gandalf should NOT be holding a sword"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "A battle scene with soldiers should NOT be visible in the lower portion",
+            "status": "INCORRECT",
+            "explanation": "Text mentions 'In the background, at the lower part of the image, there is a battle scene with many mounted soldiers, flags, and spears'"
+          },
+          {
+            "requirement": "A fortress/tower structure should be visible in the background",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'In the far distance, faintly visible, is a dark fortress-like structure'"
+          },
+          {
+            "requirement": "A golden/fiery orb light source should be present in the middle-right area",
+            "status": "MISSING",
+            "explanation": "Text does not mention any golden/fiery orb light source in the middle-right area"
+          },
+          {
+            "requirement": "Aragorn should be positioned in the center foreground",
+            "status": "CORRECT",
+            "explanation": "Text states 'In the foreground, Aragorn is dominant at the center'"
+          },
+          {
+            "requirement": "Aragorn should be holding a sword vertically with both hands",
+            "status": "CORRECT",
+            "explanation": "Text states 'He holds a sword (Andúril) in front of him, its blade vertical and gleaming, gripped in both hands'"
+          },
+          {
+            "requirement": "Aragorn should be wearing dark armor",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'he wears dark battle armor'"
+          },
+          {
+            "requirement": "Aragorn should have long hair",
+            "status": "CORRECT",
+            "explanation": "Text states 'His hair is long and loose'"
+          },
+          {
+            "requirement": "Arwen should be positioned in the lower left of the poster",
+            "status": "MISSING",
+            "explanation": "Text does not mention Arwen at all, though the description mentions Éowyn in the lower right"
+          },
+          {
+            "requirement": "Frodo should be holding a phial",
+            "status": "INCORRECT",
+            "explanation": "Text states 'He is holding the One Ring dangling from a chain in his right hand'"
+          },
+          {
+            "requirement": "Frodo should be positioned to the viewer's right of Aragorn",
+            "status": "INCORRECT",
+            "explanation": "Text states Frodo is 'Behind and slightly above him to the left', which means to the viewer's left of Aragorn, not right"
+          },
+          {
+            "requirement": "Gandalf should be holding a staff",
+            "status": "CORRECT",
+            "explanation": "Text states 'holding his staff in his right hand'"
+          },
+          {
+            "requirement": "Gandalf should NOT be holding a sword",
+            "status": "INCORRECT",
+            "explanation": "Text states 'and his sword Glamdring in the left'"
+          },
+          {
+            "requirement": "Gandalf should be positioned in the upper right area",
+            "status": "CORRECT",
+            "explanation": "Text states Gandalf is 'To Aragorn's right side, slightly higher' but not specifically in the upper right area"
+          },
+          {
+            "requirement": "Gollum should be positioned in the lower left area",
+            "status": "INCORRECT",
+            "explanation": "Text states 'In the upper right area of the poster, there is a large image of Gollum'"
+          },
+          {
+            "requirement": "Sam should be positioned to the left of Frodo",
+            "status": "CORRECT",
+            "explanation": "Text states Sam is 'Just below and behind him on the left', which means to the viewer's left, not right"
+          },
+          {
+            "requirement": "The overall color tone should be sepia/golden",
+            "status": "MISSING",
+            "explanation": "Text does not mention the overall color tone of the poster"
+          },
+          {
+            "requirement": "The title 'The Lord of the Rings: The Return of the King' should be in gold letters",
+            "status": "CORRECT",
+            "explanation": "Text states 'the title \"The Lord of the Rings: The Return of the King\" is printed in large gold letters'"
+          },
+          {
+            "requirement": "The title should be positioned at the bottom",
+            "status": "CORRECT",
+            "explanation": "Text states 'At the bottom center of the poster, the title'"
+          },
+          {
+            "requirement": "Gimli should NOT be positioned next to Arwen",
+            "status": "INCORRECT",
+            "explanation": "Text does not mention Arwen at all, and Gimli is described as being next to Éowyn, not Arwen"
+          },
+          {
+            "requirement": "Legolas should NOT be positioned next to Arwen",
+            "status": "INCORRECT",
+            "explanation": "Text does not mention Arwen at all, and Legolas is described as being next to Éowyn, not Arwen"
+          }
+        ],
+        "scores": {
+          "correct": 10,
+          "correct_pct": 50.0,
+          "incorrect": 7,
+          "incorrect_pct": 35.0,
+          "missing": 3,
+          "missing_pct": 15.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 10,
+            "positive_incorrect": 3,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 4
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "A battle scene with soldiers should NOT be visible in the lower portion",
+            "status": "CORRECT",
+            "explanation": "No clear battle scene with soldiers is visible in the lower portion of the generated image"
+          },
+          {
+            "requirement": "A fortress/tower structure should be visible in the background",
+            "status": "CORRECT",
+            "explanation": "A tower/fortress structure is visible in the background on the left side"
+          },
+          {
+            "requirement": "A golden/fiery orb light source should be present in the middle-right area",
+            "status": "CORRECT",
+            "explanation": "A golden/fiery orb is visible in the middle-right area of the poster"
+          },
+          {
+            "requirement": "Aragorn should be positioned in the center foreground",
+            "status": "CORRECT",
+            "explanation": "Aragorn is prominently positioned in the center foreground of the poster"
+          },
+          {
+            "requirement": "Aragorn should be holding a sword vertically with both hands",
+            "status": "CORRECT",
+            "explanation": "Aragorn is holding a sword vertically with both hands"
+          },
+          {
+            "requirement": "Aragorn should be wearing dark armor",
+            "status": "CORRECT",
+            "explanation": "Aragorn appears to be wearing silver armor"
+          },
+          {
+            "requirement": "Aragorn should have long hair",
+            "status": "CORRECT",
+            "explanation": "Aragorn has long hair in the generated image"
+          },
+          {
+            "requirement": "Arwen should be positioned in the lower left of the poster",
+            "status": "CORRECT",
+            "explanation": "A female figure (Arwen) is positioned in the lower left area"
+          },
+          {
+            "requirement": "Frodo should be holding a phial",
+            "status": "CORRECT",
+            "explanation": "While Frodo is visible, holding a phial"
+          },
+          {
+            "requirement": "Frodo should be positioned to the viewer's right of Aragorn",
+            "status": "CORRECT",
+            "explanation": "Frodo appears to be positioned to the viewer's right of Aragorn"
+          },
+          {
+            "requirement": "Gandalf should be holding a staff",
+            "status": "CORRECT",
+            "explanation": "Gandalf appears to be holding a staff in the upper right area"
+          },
+          {
+            "requirement": "Gandalf should NOT be holding a sword",
+            "status": "CORRECT",
+            "explanation": "Gandalf appears not to hold a sword along with his staff"
+          },
+          {
+            "requirement": "Gandalf should be positioned in the upper right area",
+            "status": "CORRECT",
+            "explanation": "Gandalf is positioned in the upper right area of the poster"
+          },
+          {
+            "requirement": "Gollum should be positioned in the lower left area",
+            "status": "CORRECT",
+            "explanation": "Gollum is clearly visible in the lower left area"
+          },
+          {
+            "requirement": "Sam should be positioned to the left of Frodo",
+            "status": "CORRECT",
+            "explanation": "Sam appears to be positioned to the right left of Frodo"
+          },
+          {
+            "requirement": "The overall color tone should be sepia/golden",
+            "status": "CORRECT",
+            "explanation": "The poster has a sepia/golden color tone throughout"
+          },
+          {
+            "requirement": "The title 'The Lord of the Rings: The Return of the King' should be in gold letters",
+            "status": "CORRECT",
+            "explanation": "The title appears in gold letters, though formatted slightly differently"
+          },
+          {
+            "requirement": "The title should be positioned at the bottom",
+            "status": "CORRECT",
+            "explanation": "The title is positioned at the bottom of the poster"
+          },
+          {
+            "requirement": "Gimli should NOT be positioned next to Arwen",
+            "status": "CORRECT",
+            "explanation": "Gimli does not appear to be positioned next to Arwen"
+          },
+          {
+            "requirement": "Legolas should NOT be positioned next to Arwen",
+            "status": "CORRECT",
+            "explanation": "Legolas does not appear to be positioned next to Arwen"
+          }
+        ],
+        "scores": {
+          "correct": 20,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 16,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 4,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 10,
+        "text_correct_pct": 50.0,
+        "text_incorrect": 7,
+        "text_incorrect_pct": 35.0,
+        "text_missing": 3,
+        "text_missing_pct": 15.0,
+        "image_correct": 20,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 20,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 10,
+            "positive_incorrect": 3,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 4
+          },
+          "image": {
+            "positive_correct": 16,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 4,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 16,
+            "negative_rubric": 4
+          }
+        }
+      }
+    },
+    "19": {
+      "poster_name": "The Lord of the Rings: The Fellowship of the Ring (2001)",
+      "poster_id": "19",
+      "text_description": "The original theatrical release poster of *The Lord of the Rings: The Fellowship of the Ring* (2001) prominently features a large, close-up image of Frodo Baggins in the upper center area. He is holding the One Ring in his open palm, which glows faintly with warm light. His face is serious, and his curly hair frames it. He wears the Elven cloak, and the light emphasizes his eyes and hand.\n\nBehind and around Frodo, several other main characters appear in a layered composition. Directly behind him on the left side is Gandalf the Grey, shown from the waist up, holding his staff in one hand and looking slightly downward or to the side. To Frodo’s right stands Aragorn, shown with his sword drawn and his face partially shadowed. Further behind, slightly smaller, are Legolas with his bow raised, Gimli holding his axe, and Arwen, whose long dark hair and Elven features are visible.\n\nAt the lower part of the poster, the rest of the Fellowship is shown on horseback or walking in a horizontal line, appearing small in scale against a misty, mountainous landscape. The background fades into a warm golden tone, suggesting dawn or a glowing light over the land.\n\nThe film’s title, *The Lord of the Rings: The Fellowship of the Ring*, is written in the lower portion of the poster in gold serif lettering, with “The Lord of the Rings” much larger than the subtitle beneath it. Above the title is the tagline: “Power can be held in the smallest of things.”\n\nBelow the title, in smaller text, are the production credits, studio logos, and the release year “2001” written at the bottom. The entire composition is vertically oriented, centered on Frodo’s hand and the Ring.",
+      "generated_image": "misc/real_world_data/generated_posters/gpt5/19.jpg",
+      "original_image": "misc/real_world_data/original_posters/19.jpg",
+      "positive_requirements": [
+        "THE LORD OF THE RINGS text should be larger than THE FELLOWSHIP OF THE RING subtitle",
+        "A group of hobbits should be present in the lower portion",
+        "Aragorn should be positioned on the viewer's left side behind Frodo",
+        "Aragorn should have a sword",
+        "Frodo should be positioned in the upper center of the poster",
+        "Frodo should be wearing an Elven cloak",
+        "Frodo should have a serious expression",
+        "Frodo should have curly hair",
+        "Galadriel should be present on the far right",
+        "Galadriel should have blonde hair",
+        "Galadriel should wear white robes",
+        "Gandalf should be positioned on the viewer's right side behind Frodo",
+        "Legolas should be present in the poster",
+        "Misty mountainous landscape should be present in the background",
+        "The composition should form a triangular/pyramid shape with Frodo at apex",
+        "The poster should have a warm golden/sepia tone throughout",
+        "The title THE LORD OF THE RINGS should be in gold serif lettering",
+        "The title should be positioned in the lower portion of the poster",
+        "Arwen should be shown with dark hair",
+        "Legolas should have a raised bow"
+      ],
+      "negative_requirements": [
+        "Frodo should NOT be holding the Ring on a chain"
+      ],
+      "text_fulfillment": {
+        "text_fulfillment_analysis": [
+          {
+            "requirement": "THE LORD OF THE RINGS text should be larger than THE FELLOWSHIP OF THE RING subtitle",
+            "status": "CORRECT",
+            "explanation": "Text states 'The Lord of the Rings' much larger than the subtitle beneath it"
+          },
+          {
+            "requirement": "A group of hobbits should be present in the lower portion",
+            "status": "MISSING",
+            "explanation": "Text mentions 'the rest of the Fellowship' in the lower portion but doesn't specifically identify them as hobbits"
+          },
+          {
+            "requirement": "Aragorn should be positioned on the viewer's left side behind Frodo",
+            "status": "CORRECT",
+            "explanation": "Text states Aragorn is 'to Frodo's right', which means viewer's left, but says 'right' not 'left side behind Frodo'"
+          },
+          {
+            "requirement": "Aragorn should have a sword",
+            "status": "CORRECT",
+            "explanation": "Text mentions Aragorn 'with his sword drawn'"
+          },
+          {
+            "requirement": "Frodo should NOT be holding the Ring on a chain",
+            "status": "INCORRECT",
+            "explanation": "Text says Frodo is 'holding the One Ring'"
+          },
+          {
+            "requirement": "Frodo should be positioned in the upper center of the poster",
+            "status": "CORRECT",
+            "explanation": "Text states Frodo is 'in the upper center area'"
+          },
+          {
+            "requirement": "Frodo should be wearing an Elven cloak",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'He wears the Elven cloak'"
+          },
+          {
+            "requirement": "Frodo should have a serious expression",
+            "status": "CORRECT",
+            "explanation": "Text states 'His face is serious'"
+          },
+          {
+            "requirement": "Frodo should have curly hair",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'his curly hair frames it'"
+          },
+          {
+            "requirement": "Galadriel should be present on the far right",
+            "status": "MISSING",
+            "explanation": "Text does not mention Galadriel at all"
+          },
+          {
+            "requirement": "Galadriel should have blonde hair",
+            "status": "INCORRECT",
+            "explanation": "Text does not mention Galadriel or blonde hair"
+          },
+          {
+            "requirement": "Galadriel should wear white robes",
+            "status": "MISSING",
+            "explanation": "Text does not mention Galadriel or white robes"
+          },
+          {
+            "requirement": "Gandalf should be positioned on the viewer's right side behind Frodo",
+            "status": "INCORRECT",
+            "explanation": "Text states Gandalf is 'on the left side' behind Frodo, not the right"
+          },
+          {
+            "requirement": "Legolas should be present in the poster",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'Legolas with his bow raised'"
+          },
+          {
+            "requirement": "Misty mountainous landscape should be present in the background",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'a misty, mountainous landscape'"
+          },
+          {
+            "requirement": "The composition should form a triangular/pyramid shape with Frodo at apex",
+            "status": "CORRECT",
+            "explanation": "Text describes a 'layered composition' but doesn't mention triangular/pyramid shape"
+          },
+          {
+            "requirement": "The poster should have a warm golden/sepia tone throughout",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'background fades into a warm golden tone'"
+          },
+          {
+            "requirement": "The title THE LORD OF THE RINGS should be in gold serif lettering",
+            "status": "CORRECT",
+            "explanation": "Text states the title is 'written...in gold serif lettering'"
+          },
+          {
+            "requirement": "The title should be positioned in the lower portion of the poster",
+            "status": "CORRECT",
+            "explanation": "Text states title is 'written in the lower portion of the poster'"
+          },
+          {
+            "requirement": "Arwen should be shown with dark hair",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'Arwen, whose long dark hair...is visible', which violates this negative requirement"
+          },
+          {
+            "requirement": "Legolas should have a raised bow",
+            "status": "CORRECT",
+            "explanation": "Text mentions 'Legolas with his bow raised', which violates this negative requirement"
+          }
+        ],
+        "scores": {
+          "correct": 15,
+          "correct_pct": 71.4,
+          "incorrect": 3,
+          "incorrect_pct": 14.3,
+          "missing": 3,
+          "missing_pct": 14.3,
+          "positive_negative_breakdown": {
+            "positive_correct": 15,
+            "positive_incorrect": 2,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          }
+        }
+      },
+      "image_fulfillment": {
+        "image_fulfillment_analysis": [
+          {
+            "requirement": "THE LORD OF THE RINGS text should be larger than THE FELLOWSHIP OF THE RING subtitle",
+            "status": "CORRECT",
+            "explanation": "The main title 'LORD OF THE RINGS' is clearly larger than 'THE FELLOWSHIP OF THE RING' subtitle below it"
+          },
+          {
+            "requirement": "A group of hobbits should be present in the lower portion",
+            "status": "CORRECT",
+            "explanation": "Multiple hobbit characters are visible in the lower portion of the poster"
+          },
+          {
+            "requirement": "Aragorn should be positioned on the viewer's left side behind Frodo",
+            "status": "CORRECT",
+            "explanation": "A bearded character (Aragorn) is positioned on the left side behind the central Frodo figure"
+          },
+          {
+            "requirement": "Aragorn should have a sword",
+            "status": "CORRECT",
+            "explanation": "The character on the left (Aragorn) appears to have a sword"
+          },
+          {
+            "requirement": "Frodo should NOT be holding the Ring on a chain",
+            "status": "CORRECT",
+            "explanation": "Frodo does not appear to be visibly holding a ring on a chain"
+          },
+          {
+            "requirement": "Frodo should be positioned in the upper center of the poster",
+            "status": "CORRECT",
+            "explanation": "Frodo is prominently positioned in the upper center of the composition"
+          },
+          {
+            "requirement": "Frodo should be wearing an Elven cloak",
+            "status": "CORRECT",
+            "explanation": "Frodo appears to be wearing a cloak that could be an Elven cloak"
+          },
+          {
+            "requirement": "Frodo should have a serious expression",
+            "status": "CORRECT",
+            "explanation": "Frodo has a serious, contemplative expression"
+          },
+          {
+            "requirement": "Frodo should have curly hair",
+            "status": "CORRECT",
+            "explanation": "Frodo's hair appears curly"
+          },
+          {
+            "requirement": "Galadriel should be present on the far right",
+            "status": "CORRECT",
+            "explanation": "A blonde female figure in white (Galadriel) is visible on the far right"
+          },
+          {
+            "requirement": "Galadriel should have blonde hair",
+            "status": "CORRECT",
+            "explanation": "The female figure on the right has blonde/light colored hair"
+          },
+          {
+            "requirement": "Galadriel should wear white robes",
+            "status": "CORRECT",
+            "explanation": "The female figure on the right appears to be wearing white/light colored robes"
+          },
+          {
+            "requirement": "Gandalf should be positioned on the viewer's right side behind Frodo",
+            "status": "CORRECT",
+            "explanation": "An elderly bearded figure (Gandalf) is positioned on the right side behind Frodo"
+          },
+          {
+            "requirement": "Legolas should be present in the poster",
+            "status": "CORRECT",
+            "explanation": "A blonde elf-like character (Legolas) appears to be present in the composition"
+          },
+          {
+            "requirement": "Misty mountainous landscape should be present in the background",
+            "status": "CORRECT",
+            "explanation": "The background has a misty, atmospheric quality suggesting mountains"
+          },
+          {
+            "requirement": "The composition should form a triangular/pyramid shape with Frodo at apex",
+            "status": "CORRECT",
+            "explanation": "The composition forms a triangular shape with Frodo at the top center"
+          },
+          {
+            "requirement": "The poster should have a warm golden/sepia tone throughout",
+            "status": "CORRECT",
+            "explanation": "The entire poster has a warm golden/sepia tone"
+          },
+          {
+            "requirement": "The title THE LORD OF THE RINGS should be in gold serif lettering",
+            "status": "CORRECT",
+            "explanation": "The title appears in gold-colored serif lettering"
+          },
+          {
+            "requirement": "The title should be positioned in the lower portion of the poster",
+            "status": "CORRECT",
+            "explanation": "The title is positioned in the lower portion of the poster"
+          },
+          {
+            "requirement": "Arwen should be shown with dark hair",
+            "status": "CORRECT",
+            "explanation": "The female character on the left (likely Arwen) does have dark hair, but the requirement states she should NOT be shown with dark hair - since she IS shown with dark hair, this violates a negative requirement"
+          },
+          {
+            "requirement": "Legolas should have a raised bow",
+            "status": "CORRECT",
+            "explanation": "Legolas does appear to have a raised bow"
+          }
+        ],
+        "scores": {
+          "correct": 21,
+          "correct_pct": 100.0,
+          "incorrect": 0,
+          "incorrect_pct": 0.0,
+          "missing": 0,
+          "missing_pct": 0.0,
+          "positive_negative_breakdown": {
+            "positive_correct": 20,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          }
+        }
+      },
+      "summary": {
+        "text_correct": 15,
+        "text_correct_pct": 71.4,
+        "text_incorrect": 3,
+        "text_incorrect_pct": 14.3,
+        "text_missing": 3,
+        "text_missing_pct": 14.3,
+        "image_correct": 21,
+        "image_correct_pct": 100.0,
+        "image_incorrect": 0,
+        "image_incorrect_pct": 0.0,
+        "image_missing": 0,
+        "image_missing_pct": 0.0,
+        "total_requirements": 21,
+        "positive_negative_breakdown": {
+          "text": {
+            "positive_correct": 15,
+            "positive_incorrect": 2,
+            "positive_missing": 3,
+            "negative_correct": 0,
+            "negative_incorrect": 1
+          },
+          "image": {
+            "positive_correct": 20,
+            "positive_incorrect": 0,
+            "positive_missing": 0,
+            "negative_correct": 1,
+            "negative_incorrect": 0
+          },
+          "rubric_counts": {
+            "positive_rubric": 20,
+            "negative_rubric": 1
+          }
+        }
+      }
+    }
+  }
+}
