@@ -23,3 +23,29 @@
 - Goal: Remove non-original or misleading evaluation entry points before committing.
 - Change: Removed non-original diagnostic evaluation code and the earlier custom symmetric evaluation launcher/code. Kept only the text-adv dataset/training utilities and the original modal_aphasia synthetic generation/text-MC evaluation script.
 - Reason: The official comparison should use modal_aphasia's original `concepts_description_mc` text MC and `synthetic_concepts` image generation benchmarks. Non-original diagnostics should not be present in the committed code because they can be mistaken for the main benchmark.
+
+## 2026-06-22 - h200 Handoff and 8-GPU Original Synthetic Eval
+
+- Goal: Move the modal_aphasia Emu3.5 evaluation from pc-super to h200 and run the original synthetic image-generation benchmark faster.
+- Change: Handoff source to h200 under `/home/chen/workplace/umm/modal-aphasia`; use conda env `emu35-modal`; download `BAAI/Emu3.5` and `BAAI/Emu3.5-VisionTokenizer` directly on h200; copy only the two LoRA adapter payloads from pc-super.
+- Runtime setup: Added h200-local image sharding arguments to `scripts/eval_emu35_original_synthetic.py` and a merge helper `scripts/merge_emu35_original_synthetic_shards.py`. The benchmark builder/grader remains modal_aphasia's original `InferenceImageOutputBuilder.build_synthetic_concepts` plus classifier grading.
+- Validation: Dry-run confirmed 44 text MC rows and 840 image rows. Sharding dry-run confirmed 8 shards x 105 image rows. Smoke eval completed for both checkpoints and wrote generated-image/classifier summaries.
+- Running: h200 supervisor `runs/run_h200_8gpu_eval_20260622_1218.sh` first runs image-adv-original across GPUs 0-7, then text-adv across GPUs 0-7. Logs are under `runs/h200_original_synthetic_*_8gpu_shards_20260622_1218_shard_*.log`.
+- Output paths: image-adv shards `outputs/eval/h200_original_synthetic_image_adv_8gpu_shards_20260622_1218`; merged image-adv output `outputs/eval/h200_original_synthetic_image_adv_8gpu_merged_20260622_1218`; text-adv shards `outputs/eval/h200_original_synthetic_text_adv_8gpu_shards_20260622_1218`; merged text-adv output `outputs/eval/h200_original_synthetic_text_adv_8gpu_merged_20260622_1218`.
+- Current status: image-adv-original 8 shards are running on h200 GPUs 0-7, each using about 26GB GPU memory. Text-adv will start automatically after image-adv merges.
+
+## 2026-06-22 - h200 Two-Tasks-Per-GPU Eval Update
+
+- Goal: Use the remaining h200 GPU memory to run both checkpoint conditions concurrently.
+- Change: Stopped the sequential 8-GPU supervisor shell while leaving the already-running image-adv shard processes alive. Launched text-adv shards on the same GPUs 0-7 and started `runs/run_h200_2pergpu_eval_20260622_1228.sh` to watch both sets and merge both outputs.
+- Runtime setup: Each GPU now runs one `image_adv_original` shard and one `text_adv` shard. `TORCHINDUCTOR_COMPILE_THREADS=4` is set for the newly launched text-adv shard supervisor to reduce compile-worker pressure.
+- Output paths: image-adv merged output remains `outputs/eval/h200_original_synthetic_image_adv_8gpu_merged_20260622_1218`; text-adv merged output is `outputs/eval/h200_original_synthetic_text_adv_8gpu_merged_20260622_1228`.
+- Current status: 16 eval processes are running. GPUs 0-7 each use about 53.5GB memory with high utilization. Image-adv shards have started writing generated images; text-adv shards have loaded the model and are entering generation.
+
+## 2026-06-22 - Dynamic Image Resplit After Text Completion
+
+- Goal: Once text-adv finishes, keep h200 GPUs saturated by redistributing unfinished image-adv rows so each GPU again runs two image workers.
+- Change: Added `--image-rows-file` support to `scripts/eval_emu35_original_synthetic.py`, added `scripts/recover_and_split_image_rows.py`, stopped the previous two-task watcher, and launched `runs/run_h200_dynamic_image_resplit_20260622_2055.sh`.
+- Runtime plan: The dynamic watcher waits for all text-adv shard processes to finish, merges text-adv, stops the old image-adv shard processes, recovers already generated PNGs into a graded recovered shard, splits remaining image sample IDs into 16 residual row-list files, and launches two residual image workers per GPU.
+- Output paths: recovered/residual image shards `outputs/eval/h200_original_synthetic_image_adv_dynamic_shards_20260622_2055`; final dynamic image-adv merge `outputs/eval/h200_original_synthetic_image_adv_dynamic_merged_20260622_2055`; text merge remains `outputs/eval/h200_original_synthetic_text_adv_8gpu_merged_20260622_1228`.
+- Current status: dynamic watcher `runs/h200_dynamic_image_resplit_supervisor_20260622_2055.log` is waiting for the final text-adv shard to finish. Existing image-adv workers continue running until that trigger fires.

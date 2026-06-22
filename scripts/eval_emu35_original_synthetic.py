@@ -90,9 +90,21 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--classifier-free-guidance", type=float, default=3.0)
     parser.add_argument("--max-text-rows", type=int, default=None)
     parser.add_argument("--max-image-rows", type=int, default=None)
+    parser.add_argument(
+        "--image-rows-file",
+        default=None,
+        help="Optional newline-delimited sample_id file limiting image rows for dynamic sharded runs.",
+    )
+    parser.add_argument("--num-image-shards", type=int, default=1)
+    parser.add_argument("--image-shard-index", type=int, default=0)
     parser.add_argument("--image-splits", default="train,test")
     parser.add_argument("--dry-run", action="store_true")
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.num_image_shards < 1:
+        raise SystemExit("--num-image-shards must be >= 1")
+    if not 0 <= args.image_shard_index < args.num_image_shards:
+        raise SystemExit("--image-shard-index must satisfy 0 <= index < num shards")
+    return args
 
 
 def ensure_emu_imports(emu_repo: Path):
@@ -456,6 +468,19 @@ def build_eval_rows(args: argparse.Namespace) -> tuple[list[dict[str, Any]], lis
         if args.max_image_rows is not None and len(image_rows) >= args.max_image_rows:
             break
         image_rows.append({"sample_id": f"image_{row['split']}_{idx:04d}", "dataset_index": idx, **dict(row)})
+    if args.image_rows_file:
+        selected = {
+            line.strip()
+            for line in repo_path(args.image_rows_file).read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        }
+        image_rows = [row for row in image_rows if row["sample_id"] in selected]
+    if args.num_image_shards > 1:
+        image_rows = [
+            row
+            for position, row in enumerate(image_rows)
+            if position % args.num_image_shards == args.image_shard_index
+        ]
 
     return text_rows, image_rows
 
