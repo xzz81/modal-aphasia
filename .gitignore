@@ -5,6 +5,12 @@ eval_dataset.json
 # Default data dir
 /data/
 
+# Local model/checkpoint and runtime artifacts
+/model/
+/outputs/
+/runs/
+/logs/
+
 # Plots
 /plots/
 /plots_*/
