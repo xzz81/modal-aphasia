@@ -49,3 +49,12 @@
 - Runtime plan: The dynamic watcher waits for all text-adv shard processes to finish, merges text-adv, stops the old image-adv shard processes, recovers already generated PNGs into a graded recovered shard, splits remaining image sample IDs into 16 residual row-list files, and launches two residual image workers per GPU.
 - Output paths: recovered/residual image shards `outputs/eval/h200_original_synthetic_image_adv_dynamic_shards_20260622_2055`; final dynamic image-adv merge `outputs/eval/h200_original_synthetic_image_adv_dynamic_merged_20260622_2055`; text merge remains `outputs/eval/h200_original_synthetic_text_adv_8gpu_merged_20260622_1228`.
 - Current status: dynamic watcher `runs/h200_dynamic_image_resplit_supervisor_20260622_2055.log` is waiting for the final text-adv shard to finish. Existing image-adv workers continue running until that trigger fires.
+
+## 2026-06-22 - h200 Original Synthetic Eval Final Results
+
+- Goal: Preserve the completed h200 original synthetic benchmark comparison for text-adv vs image-adv-original.
+- Command/config: Original modal_aphasia builders `concepts_description_mc` and `synthetic_concepts`; dynamic image residual phase used `--image-rows-file` with 16 residual shards after recovering 248 completed image rows.
+- Output paths: text-adv final output `outputs/eval/h200_original_synthetic_text_adv_8gpu_merged_20260622_1228`; image-adv final output `outputs/eval/h200_original_synthetic_image_adv_dynamic_merged_20260622_2055`; saved bundle `outputs/eval/final_bundles/h200_original_synthetic_text_image_adv_20260622.tar.gz`.
+- Result: text-adv text MC 35/44 = 79.5%, image all-attribute 0/840 = 0.0%. image-adv-original text MC 7/44 = 15.9%, image all-attribute 12/840 = 1.43%; per-attribute image accuracy color 34.0%, pattern 51.2%, position 34.2%, shape 15.1%.
+- Interpretation: text-adv preserves text retrieval and loses image generation; image-adv-original preserves more image attributes but has weak exact all-attribute generation and poor text MC. The strict `image_all_correct && text_wrong` case count is 12/840 for image-adv-original and 0/840 for text-adv.
+- Preservation: Bundle SHA256 `65e90b047ada25034d30942d1d66eacc9813e130bff52e59dff16e2a89b91b71`; copied to h200, pc-super, and local Codex workspace.
