@@ -17,14 +17,8 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.eval_emu35_original_synthetic import (  # noqa: E402
-    ATTRS,
-    build_case_table,
     grade_image_row,
-    per_attribute_image_text_accuracy,
-    summarize_cases,
-    summarize_image,
-    summarize_image_by_split,
-    summarize_text,
+    write_run_outputs,
     write_jsonl,
 )
 
@@ -91,29 +85,7 @@ def main() -> None:
             recovered_samples.add(sample_id)
 
     recovered.sort(key=lambda row: (row.get("split", ""), row.get("dataset_index", -1), row["sample_id"]))
-    write_jsonl(recovered_dir / "image_memory.jsonl", recovered)
-    write_jsonl(recovered_dir / "text_memory.jsonl", [])
-    cases = build_case_table(args.run_name, [], recovered)
-    write_jsonl(recovered_dir / "case_table.jsonl", cases)
-    per_attr = per_attribute_image_text_accuracy([], recovered)
-    (recovered_dir / "per_attribute_image_text_accuracy.json").write_text(
-        json.dumps(per_attr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
-    summary = {
-        "run": args.run_name,
-        "adapter_path": None,
-        "data_builder": {
-            "text": "InferenceTextOutputBuilder.build_concepts_description_mc",
-            "image": "InferenceImageOutputBuilder.build_synthetic_concepts",
-        },
-        "text": summarize_text([]),
-        "image": summarize_image(recovered),
-        "image_by_split": summarize_image_by_split(recovered),
-        "per_attribute_image_text_accuracy": per_attr,
-        "cases": summarize_cases(cases),
-        "recovered_from_png": True,
-    }
-    (recovered_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    write_run_outputs(recovered_dir, args.run_name, None, [], recovered, {"recovered_from_png": True})
 
     remaining = [row for row in rows if row["sample_id"] not in recovered_samples]
     splits = [[] for _ in range(args.num_residual_shards)]

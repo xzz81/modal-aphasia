@@ -14,13 +14,8 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.eval_emu35_original_synthetic import (  # noqa: E402
-    build_case_table,
-    per_attribute_image_text_accuracy,
-    summarize_cases,
-    summarize_image,
-    summarize_image_by_split,
-    summarize_text,
-    write_jsonl,
+    write_combined_outputs,
+    write_run_outputs,
 )
 
 
@@ -76,49 +71,15 @@ def main() -> None:
     image_rows.sort(key=lambda row: (row.get("split", ""), row.get("dataset_index", -1), row.get("sample_id", "")))
 
     run_dir = output_dir / args.run_name
-    run_dir.mkdir(parents=True, exist_ok=True)
-    write_jsonl(run_dir / "text_memory.jsonl", text_rows)
-    write_jsonl(run_dir / "image_memory.jsonl", image_rows)
-    cases = build_case_table(args.run_name, text_rows, image_rows)
-    write_jsonl(run_dir / "case_table.jsonl", cases)
-    per_attr = per_attribute_image_text_accuracy(text_rows, image_rows)
-    (run_dir / "per_attribute_image_text_accuracy.json").write_text(
-        json.dumps(per_attr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    summary, cases = write_run_outputs(
+        run_dir,
+        args.run_name,
+        args.adapter_path,
+        text_rows,
+        image_rows,
+        {"shards_root": str(shards_root), "num_shards": len(shard_dirs)},
     )
-    summary = {
-        "run": args.run_name,
-        "adapter_path": args.adapter_path,
-        "data_builder": {
-            "text": "InferenceTextOutputBuilder.build_concepts_description_mc",
-            "image": "InferenceImageOutputBuilder.build_synthetic_concepts",
-        },
-        "text": summarize_text(text_rows),
-        "image": summarize_image(image_rows),
-        "image_by_split": summarize_image_by_split(image_rows),
-        "per_attribute_image_text_accuracy": per_attr,
-        "cases": summarize_cases(cases),
-        "shards_root": str(shards_root),
-        "num_shards": len(shard_dirs),
-    }
-    (run_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    write_jsonl(output_dir / "case_table.jsonl", cases)
-    (output_dir / "summary.json").write_text(
-        json.dumps(
-            {
-                "format": "emu35_original_synthetic_modal_memory_eval_v1",
-                "data_root": str(Path(args.data_root)),
-                "runs": [[args.run_name, args.adapter_path]],
-                "text_builder": "InferenceTextOutputBuilder.build_concepts_description_mc",
-                "image_builder": "InferenceImageOutputBuilder.build_synthetic_concepts",
-                "summaries": [summary],
-                "case_conclusion": summarize_cases(cases),
-            },
-            ensure_ascii=False,
-            indent=2,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
+    write_combined_outputs(output_dir, Path(args.data_root), [(args.run_name, args.adapter_path)], [summary], cases)
     print(json.dumps({"output_dir": str(output_dir), "text_rows": len(text_rows), "image_rows": len(image_rows)}, ensure_ascii=False))
 
 

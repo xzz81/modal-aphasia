@@ -46,6 +46,11 @@ SPECIAL_TOKENS = {
 }
 
 ATTRS = ("shape", "color", "pattern", "position")
+EVAL_FORMAT = "emu35_original_synthetic_modal_memory_eval_v1"
+DATA_BUILDER = {
+    "text": "InferenceTextOutputBuilder.build_concepts_description_mc",
+    "image": "InferenceImageOutputBuilder.build_synthetic_concepts",
+}
 
 
 def repo_path(path: str | Path) -> Path:
@@ -136,6 +141,10 @@ def write_jsonl(path: Path, rows: list[dict[str, Any]]) -> None:
     with path.open("w", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def stringify_path(path: str | Path | None) -> str | None:
+    return None if path is None else str(path)
 
 
 def build_prompt(question: str, mode: str) -> str:
@@ -447,6 +456,96 @@ def summarize_cases(cases: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def build_run_summary(
+    run_name: str,
+    adapter_path: str | Path | None,
+    text_outputs: list[dict[str, Any]],
+    image_outputs: list[dict[str, Any]],
+    extra: dict[str, Any] | None = None,
+    cases: list[dict[str, Any]] | None = None,
+    per_attr: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    if cases is None:
+        cases = build_case_table(run_name, text_outputs, image_outputs)
+    if per_attr is None:
+        per_attr = per_attribute_image_text_accuracy(text_outputs, image_outputs)
+    summary = {
+        "run": run_name,
+        "adapter_path": stringify_path(adapter_path),
+        "data_builder": DATA_BUILDER,
+        "text": summarize_text(text_outputs),
+        "image": summarize_image(image_outputs),
+        "image_by_split": summarize_image_by_split(image_outputs),
+        "per_attribute_image_text_accuracy": per_attr,
+        "cases": summarize_cases(cases),
+    }
+    if extra:
+        summary.update(extra)
+    return summary
+
+
+def write_run_outputs(
+    run_dir: Path,
+    run_name: str,
+    adapter_path: str | Path | None,
+    text_outputs: list[dict[str, Any]],
+    image_outputs: list[dict[str, Any]],
+    extra_summary: dict[str, Any] | None = None,
+) -> tuple[dict[str, Any], list[dict[str, Any]]]:
+    run_dir.mkdir(parents=True, exist_ok=True)
+    write_jsonl(run_dir / "text_memory.jsonl", text_outputs)
+    write_jsonl(run_dir / "image_memory.jsonl", image_outputs)
+    cases = build_case_table(run_name, text_outputs, image_outputs)
+    write_jsonl(run_dir / "case_table.jsonl", cases)
+    per_attr = per_attribute_image_text_accuracy(text_outputs, image_outputs)
+    (run_dir / "per_attribute_image_text_accuracy.json").write_text(
+        json.dumps(per_attr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    summary = build_run_summary(
+        run_name,
+        adapter_path,
+        text_outputs,
+        image_outputs,
+        extra_summary,
+        cases=cases,
+        per_attr=per_attr,
+    )
+    (run_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return summary, cases
+
+
+def build_combined_summary(
+    data_root: str | Path,
+    runs: list[tuple[str, str | Path]],
+    summaries: list[dict[str, Any]],
+    cases: list[dict[str, Any]],
+) -> dict[str, Any]:
+    return {
+        "format": EVAL_FORMAT,
+        "data_root": stringify_path(data_root),
+        "runs": [(name, stringify_path(path)) for name, path in runs],
+        "text_builder": DATA_BUILDER["text"],
+        "image_builder": DATA_BUILDER["image"],
+        "summaries": summaries,
+        "case_conclusion": summarize_cases(cases),
+    }
+
+
+def write_combined_outputs(
+    output_dir: Path,
+    data_root: str | Path,
+    runs: list[tuple[str, str | Path]],
+    summaries: list[dict[str, Any]],
+    cases: list[dict[str, Any]],
+) -> None:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    write_jsonl(output_dir / "case_table.jsonl", cases)
+    (output_dir / "summary.json").write_text(
+        json.dumps(build_combined_summary(data_root, runs, summaries, cases), ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
 def build_eval_rows(args: argparse.Namespace) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     from modal_aphasia.data.builders import InferenceImageOutputBuilder, InferenceTextOutputBuilder
 
@@ -541,28 +640,7 @@ def evaluate_run(
             output["grading_all_correct"] = False
         image_outputs.append(output)
 
-    write_jsonl(out_dir / "text_memory.jsonl", text_outputs)
-    write_jsonl(out_dir / "image_memory.jsonl", image_outputs)
-    cases = build_case_table(run_name, text_outputs, image_outputs)
-    write_jsonl(out_dir / "case_table.jsonl", cases)
-    per_attr = per_attribute_image_text_accuracy(text_outputs, image_outputs)
-    (out_dir / "per_attribute_image_text_accuracy.json").write_text(
-        json.dumps(per_attr, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-    )
-    summary = {
-        "run": run_name,
-        "adapter_path": str(adapter_path),
-        "data_builder": {
-            "text": "InferenceTextOutputBuilder.build_concepts_description_mc",
-            "image": "InferenceImageOutputBuilder.build_synthetic_concepts",
-        },
-        "text": summarize_text(text_outputs),
-        "image": summarize_image(image_outputs),
-        "image_by_split": summarize_image_by_split(image_outputs),
-        "per_attribute_image_text_accuracy": per_attr,
-        "cases": summarize_cases(cases),
-    }
-    (out_dir / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    summary, cases = write_run_outputs(out_dir, run_name, adapter_path, text_outputs, image_outputs)
 
     del model
     del vq_model
@@ -582,7 +660,7 @@ def main() -> None:
     print(
         json.dumps(
             {
-                "format": "emu35_original_synthetic_modal_memory_eval_v1",
+                "format": EVAL_FORMAT,
                 "runs": [(name, str(path)) for name, path in runs],
                 "data_root": str(repo_path(args.data_root)),
                 "num_text_rows": len(text_rows),
@@ -609,24 +687,7 @@ def main() -> None:
         summaries.append(summary)
         all_cases.extend(cases)
 
-    write_jsonl(repo_path(args.output_dir) / "case_table.jsonl", all_cases)
-    (repo_path(args.output_dir) / "summary.json").write_text(
-        json.dumps(
-            {
-                "format": "emu35_original_synthetic_modal_memory_eval_v1",
-                "data_root": str(repo_path(args.data_root)),
-                "runs": [(name, str(path)) for name, path in runs],
-                "text_builder": "InferenceTextOutputBuilder.build_concepts_description_mc",
-                "image_builder": "InferenceImageOutputBuilder.build_synthetic_concepts",
-                "summaries": summaries,
-                "case_conclusion": summarize_cases(all_cases),
-            },
-            ensure_ascii=False,
-            indent=2,
-        )
-        + "\n",
-        encoding="utf-8",
-    )
+    write_combined_outputs(repo_path(args.output_dir), repo_path(args.data_root), runs, summaries, all_cases)
 
 
 if __name__ == "__main__":
