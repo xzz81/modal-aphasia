@@ -116,3 +116,15 @@
 - limitation: current Janus SettingType implements safety_unsafe only; the safety_refusal aligned phase referenced by configs/safety/train.sh is not implemented in modal_aphasia/janus/train.py and was not queued.
 - next step: monitor concepts completion, verify faces starts and finishes, then verify safety_unsafe starts and reaches first eval/loss logs.
 
+
+## 2026-06-24 - Tianyang Janus-Pro Guarded Queue Repair
+
+- goal: ensure the queued faces and safety_unsafe fine-tuning stages only start after the previous Janus-Pro stage truly succeeds.
+- hypothesis or change: replace the original process/session-only waits with guarded tmux queues that also require `Finished training` in the previous log and final checkpoint files `config.json` plus `model.safetensors.index.json`.
+- command/config: killed only `janus-faces-queued` and `janus-safety-queued`; relaunched `/tmp/janus_faces_guarded.sh` and `/tmp/janus_safety_guarded.sh`. Concepts training in `janus-concepts-full` was left untouched.
+- data/model paths: concepts output `model/finetuned_janus/concepts/janus-concepts-24perm-noaux-seed178430-20260624`; faces output `model/finetuned_janus/faces/janus-faces-seed178430-20260624`; safety output `model/finetuned_janus/safety/janus-safety-unsafe-seed178430-20260624`.
+- output paths: `runs/janus_faces_queued_20260624.log`; `runs/janus_safety_queued_20260624.log`.
+- result: guarded queues are active and waiting; current concepts training was still running at about step 955/4014 when verified.
+- interpretation: this prevents a failed concepts or faces run from silently triggering the next benchmark family and hiding the failure.
+- next step: monitor concepts completion, then verify the guarded faces queue starts and reaches first loss/eval logs.
+
