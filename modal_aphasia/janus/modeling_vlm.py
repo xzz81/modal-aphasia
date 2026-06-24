@@ -1,6 +1,7 @@
 # Modified from https://github.com/DeepSeek-AI/Janus/blob/main/janus/models/modeling_vlm.py
 
 import os
+from pathlib import Path
 
 import numpy as np
 import torch
@@ -27,15 +28,26 @@ IMAGE_TOKEN_NUM_PER_IMAGE = 576
 PATCH_SIZE = 16
 
 
+def _resolve_model_path(model_path: str | os.PathLike) -> str | Path:
+    path = Path(model_path)
+    if path.exists():
+        return path
+    local_janus = Path(__file__).resolve().parents[2] / "model" / "Janus-Pro-7B"
+    if str(model_path) == "deepseek-ai/Janus-Pro-7B" and local_janus.exists():
+        return local_janus
+    return str(model_path)
+
+
 def load_model(
     model_path: str | os.PathLike,
 ) -> tuple["MultiModalityCausalLM", _processing_vlm.VLChatProcessor]:
-    # Always use the original Janus-Pro-7B processor; there should be no changes and we don't save it
-    processor = _processing_vlm.VLChatProcessor.from_pretrained("deepseek-ai/Janus-Pro-7B", use_fast=True)
+    resolved_model_path = _resolve_model_path(model_path)
+    processor_path = resolved_model_path if Path(resolved_model_path).exists() else "deepseek-ai/Janus-Pro-7B"
+    processor = _processing_vlm.VLChatProcessor.from_pretrained(processor_path, use_fast=True)
 
     # FIXME: What's the dtype? Config looks like bf16
     model = MultiModalityCausalLM.from_pretrained(
-        model_path,
+        resolved_model_path,
         trust_remote_code=False,
     )
 

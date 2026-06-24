@@ -58,3 +58,15 @@
 - Result: text-adv text MC 35/44 = 79.5%, image all-attribute 0/840 = 0.0%. image-adv-original text MC 7/44 = 15.9%, image all-attribute 12/840 = 1.43%; per-attribute image accuracy color 34.0%, pattern 51.2%, position 34.2%, shape 15.1%.
 - Interpretation: text-adv preserves text retrieval and loses image generation; image-adv-original preserves more image attributes but has weak exact all-attribute generation and poor text MC. The strict `image_all_correct && text_wrong` case count is 12/840 for image-adv-original and 0/840 for text-adv.
 - Preservation: Bundle SHA256 `65e90b047ada25034d30942d1d66eacc9813e130bff52e59dff16e2a89b91b71`; copied to h200, pc-super, and local Codex workspace.
+
+## 2026-06-24 - Tianyang Janus-Pro-7B Local Asset Setup
+
+- goal: make Janus-Pro-7B available inside the tianyang modal-aphasia handoff for original Janus workflows.
+- hypothesis or change: reuse existing `/cache/ummu/model/Janus-Pro-7B` and expose it as repo-relative `model/Janus-Pro-7B`; update Janus model loading to prefer the local repo asset when callers request `deepseek-ai/Janus-Pro-7B`.
+- command/config: linked `model/Janus-Pro-7B -> /cache/ummu/model/Janus-Pro-7B`; validated `VLChatProcessor.from_pretrained(model/Janus-Pro-7B)` and `python3 -m py_compile modal_aphasia/janus/modeling_vlm.py modal_aphasia/janus/inference.py modal_aphasia/janus/train.py`.
+- data/model paths: `model/Janus-Pro-7B`; physical asset on tianyang at `/cache/ummu/model/Janus-Pro-7B`.
+- output paths: no runtime outputs; git-tracked code change in `modal_aphasia/janus/modeling_vlm.py`.
+- result: local processor resolution works for `deepseek-ai/Janus-Pro-7B`, avoiding remote Hugging Face access for the processor/model path when the local asset exists.
+- interpretation: Janus-Pro workflows in this project can now use the local tianyang asset consistently with repo-relative paths.
+- next step: run a Janus smoke inference/training check if Janus-specific evaluation is needed.
+
