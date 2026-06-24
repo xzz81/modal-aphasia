@@ -19,3 +19,10 @@
 - Cause: the first queue used process/session disappearance as the only readiness condition.
 - Repair: replaced only the waiting tmux sessions with guarded scripts under /tmp that check `Finished training` plus final checkpoint files before launching the next benchmark family; left the active concepts training process untouched.
 - Verification: `janus-faces-queued` and `janus-safety-queued` are running guarded scripts and waiting; `janus-concepts-full` continued progressing to about step 955/4014 after the queue replacement.
+
+## 2026-06-24 - Tianyang Janus faces effective-batch correction
+
+- Symptom: the queued faces Janus-Pro run used `--num_processes 4 --per-device-train-batch-size 1 --gradient-accumulation-steps 1 --num-epochs 100`, producing 15000 optimizer steps instead of matching the original faces config effective global batch of 32.
+- Cause: the tianyang memory-safe launch reduced per-device batch size and GPU count but did not compensate with gradient accumulation.
+- Repair: stopped the wrong-effective-batch faces run, archived its log as `runs/janus_faces_queued_20260624.aborted_effective_batch4_20260624_153001.log`, archived the waiting safety log, moved the partial faces output aside, and restarted guarded faces with `--num_processes 4 --per-device-train-batch-size 1 --gradient-accumulation-steps 8 --eval-steps 20`.
+- Verification: the corrected faces process is running with `--gradient-accumulation-steps 8`; the Trainer progress total is `0/1900`, matching the original global-batch-32 optimizer-step semantics under per-epoch ceiling, and all 4 A100 GPUs showed active memory allocation and 100% utilization when checked.
