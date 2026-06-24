@@ -128,3 +128,13 @@
 - interpretation: this prevents a failed concepts or faces run from silently triggering the next benchmark family and hiding the failure.
 - next step: monitor concepts completion, then verify the guarded faces queue starts and reaches first loss/eval logs.
 
+## 2026-06-24 - Tianyang Janus-Pro Concepts Full Completion and Faces Start
+
+- goal: verify completion of the full synthetic concepts Janus-Pro benchmark fine-tuning stage and confirm the next benchmark family starts through the guarded queue.
+- hypothesis or change: no setting change; continue the previously launched `synthetic_concepts_extended` 24-prompt-permutation no-aux run until final checkpoint save, then let the guarded faces queue start automatically.
+- command/config: monitored `runs/janus_concepts_full_noaux_24perm_20260624.log`; training command remained `/opt/venv/bin/python -m accelerate.commands.launch --config-file configs/concepts_janus/accelerate_config.yaml --num_processes 4 -m modal_aphasia.janus.train --setting synthetic_concepts_extended --num-prompt-permutations 24 --aux-fraction 0.0 --language-model-only --per-device-train-batch-size 1 --gradient-accumulation-steps 1 --save-final-model`.
+- data/model paths: `data/synthetic_images`; `model/Janus-Pro-7B`; concepts checkpoint `model/finetuned_janus/concepts/janus-concepts-24perm-noaux-seed178430-20260624`; faces dataset `data/faces`.
+- output paths: concepts log `runs/janus_concepts_full_noaux_24perm_20260624.log`; faces queue log `runs/janus_faces_queued_20260624.log`.
+- result: concepts completed 4014/4014 steps with `train_runtime=9656.9447`, `train_loss=0.27583238417156974`, and `Finished training`. Final checkpoint contains `config.json`, `model.safetensors.index.json`, seven safetensors shards, tokenizer files, and processor files. The guarded faces queue detected the successful checkpoint and logged `starting_faces_2026-06-24T14:47:58+08:00`.
+- interpretation: the first Janus-Pro benchmark family finished successfully on tianyang; guard conditions worked as intended and released the next benchmark family only after the final concepts checkpoint was complete.
+- next step: monitor faces until it reaches stable loss/eval logs and final checkpoint, then verify the safety_unsafe guarded queue starts.
